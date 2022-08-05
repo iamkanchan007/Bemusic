@@ -1,0 +1,83 @@
+<div class="custom-track-total">
+<div class="stat ng-star-inserted">
+    <mat-icon [svgIcon]="headerData.icon"></mat-icon>
+    <div class="details">
+        <div class="name">{{headerData.name}}</div>
+        <div class="count ng-star-inserted">{{headerData.value}}</div>
+    </div>
+</div>
+</div>
+<div class="datatable responsive-table">
+    <datatable-header pluralResourceName="track by title or artist">
+        <ng-container leftContent>
+            <!-- <a mat-raised-button color="accent" routerLink="/admin/upload" *ngIf="currentUser.hasPermission('tracks.create')" trans>Upload</a>
+            <a mat-button routerLink="/admin/tracks/new" *ngIf="currentUser.hasPermission('tracks.create')" trans>Create</a> -->
+             <a mat-raised-button color="accent" routerLink="/admin/tracks/new" *ngIf="currentUser.hasPermission('tracks.create')" trans>Upload</a>
+        </ng-container>
+        <button rightContent mat-raised-button color="accent" (click)="maybeDeleteSelectedTracks()" *ngIf="currentUser.hasPermission('tracks.delete')" trans>Delete Selected</button>
+    </datatable-header>
+    <table class="material-table">
+        <thead>
+        <tr>
+            <th *ngIf="currentUser.hasRole('admin')" table-header-checkbox></th>
+            <th table-sort-header="name" trans>Track</th>
+            <th table-sort-header="artist">Artist</th>
+            <th table-sort-header trans>Duration</th>
+            <th table-sort-header="download">Downloads</th>  
+           <!--  <th table-sort-header="plays_count" trans>Plays</th> -->
+            <th table-sort-header="date" trans>Released Date</th>
+            <th table-sort-header="enable">Enable</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let track of tracks$ | async">
+        <tr>
+            <td *ngIf="currentUser.hasRole('admin')" [table-body-checkbox]="track.id"></td>
+            <td>
+                <div class="column-with-image">
+                    <a *ngIf="track.url" href="javascript:void(0)" (click)="openTrack(track.id)" class="playbutton">
+                        <i class="bi bi-play-fill ps-1"></i>
+                    </a>
+                    <!-- <media-image [media]="track" default="album"></media-image> -->
+                    <!-- <a [routerLink]="urls.track(track)" class="link" target="_blank">{{track.name}}</a> -->
+                    {{track.name}}
+                </div>
+            </td>
+            <td data-label="Artist">
+                <div class="column-with-image" *ngIf="((track.artists && track.artists.length>0) && track.artists[0]) as artist">
+                    <!-- <media-image [media]="artist" default="album"></media-image> -->
+                    <!-- <a [routerLink]="urls.artist(artist)" class="link" target="_blank">{{artist.name}}</a> -->
+                    {{artist.name}}
+                </div>
+            </td>
+            <td data-label="Duration">{{formatDuration(track.duration)}}</td>
+            <td>{{track.user_downloads ? track.user_downloads : 0}}</td>
+            <!-- <td data-label="Plays">{{track.plays_count}}</td> -->
+            <td>{{track.date | formattedDate}}</td>
+            <td><mat-slide-toggle trans [checked]="track.enable? true: false" (change)="toggleEnable($event, track.id)"></mat-slide-toggle></td>
+            <td class="edit-column">
+                <button mat-icon-button (click)="openCrupdateLyricModal(track)" [matTooltip]="'Add to Playlist' | trans">
+                    <mat-icon svgIcon="add"></mat-icon>
+                </button>
+                <a mat-icon-button [routerLink]="['/admin/tracks', track.id]"  *ngIf="currentUser.hasPermission('tracks.update')" [matTooltip]="'Edit track' | trans">
+                    <mat-icon svgIcon="edit"></mat-icon>
+                </a>
+            </td>
+        </tr>
+        <tr *ngIf="opentrack == track.id">
+            <td colspan="8">
+                <audio controls>
+                    <source src="{{trackurl(track)}}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </td>
+        </tr>
+        </ng-container>
+        </tbody>
+    </table>
+    <no-results-message svgImage="music.svg" *ngIf="datatable.paginator.noResults$ | async">
+        <span primary-text>No tracks have been created yet</span>
+    </no-results-message>
+    <datatable-footer></datatable-footer>
+</div>

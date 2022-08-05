@@ -1,0 +1,20 @@
+<ul *ngIf="playlists && playlists[0]" class="playlist-card">
+  <ng-container *ngFor="let playlist of playlists; let i = index">
+    <!-- <div class="clearfix" *ngIf="i % 5 == 0"></div> -->
+    <li>
+      <!-- <a (click)="openDetails(playlist)" href="javascript:;">
+        <media-image class="header-image" [media]="playlist"></media-image>
+        <p class="mt-3">{{playlist.name}}</p>
+      </a> -->
+      <a [routerLink]="urls.playlist(playlist)" href="javascript:void(0)" class="img-container">
+          <media-image [media]="playlist"></media-image>
+          <div class="overlay">
+            <div class="text"></div>
+          </div>
+        </a>
+        <a [routerLink]="urls.playlist(playlist)" href="javascript:void(0)">
+          <p class="mt-3 playlist-name">{{playlist.name}}</p>
+        </a>
+    </li>
+  </ng-container>
+</ul>

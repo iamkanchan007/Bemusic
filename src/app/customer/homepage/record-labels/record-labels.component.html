@@ -1,0 +1,73 @@
+<section>
+    <div class="become-a-label-wrapper">
+        <div class="container-fluid" trans>
+            <h1 class="text-center" trans>Record labels and independent artists</h1>
+            <p class="text-center mb-0" trans>Have your music marketed on our global network of professional Club/Radio DJS!
+            </p>
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="row mb-5 mt-4 justify-content-between">
+                        <div class="col-md-3 text-center">
+                            <i class="bi bi-globe"></i>
+                            <h3 trans>Exposure</h3>
+                            <p class="label-wrapper-info"  trans>Get access to song insights and realtime statistics and
+                                control how your music is performing.
+                            </p>
+                        </div>
+
+                        <div class="col-md-3 text-center">
+                            <i class="bi bi-graph-up"></i>
+                            <h3 trans>Analytics</h3>
+                            <p class="label-wrapper-info" trans>Get valuable feedback from our DJs in over 150 countries
+                                around the world and start growing
+                                your global fanbase.
+                            </p>
+                        </div>
+
+                        <div class="col-md-3 text-center">
+                            <i class="bi bi-megaphone"></i>
+                            <h3 trans>Promotions</h3>
+                            <p class="label-wrapper-info" trans>Promote your songs on our trends and charts pages and boost
+                                them to the top.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center my-5">
+                        <!-- <a class="btn btn-outline-success get-started" href="#"></a> -->
+                        <!-- Button trigger modal -->
+                        <!-- <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop" trans>
+                            Register label
+                        </button> -->
+                        <a *ngIf="!currentUser.isLoggedIn()" class="btn btn-success subscribe-button" href="javascript:;" routerLink="/label-register" trans>Register label
+                        </a>
+
+                        <!-- Modal -->
+                        <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel" trans>Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                            <i _ngcontent-xlp-c415="" class="bi bi-x-lg modal-close-icon"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div> -->
+                                    <!-- <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Understood</button>
+                                    </div> -->
+                                <!-- </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

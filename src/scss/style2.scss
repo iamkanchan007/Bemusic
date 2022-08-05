@@ -1,0 +1,465 @@
+// .btn-outline-success,
+// .btn-outline-success:hover {
+//     color: #000 !important;
+// }
+
+.h1, h1{
+    color: #232323;
+}
+.h3, h3{
+    color: #232323;
+}
+.h5, h5{
+    color: #232323;
+}
+p{
+    color: #808080;
+}
+.be-dark-mode .h1, .be-dark-mode h1{
+    color: #fff;
+}
+.be-dark-mode .h3, .be-dark-mode h3{
+    color: #fff;
+}
+.be-dark-mode .h5, .be-dark-mode h5{
+    color: #fff;
+}
+.be-dark-mode p{
+    color: #B7B7B7;
+}
+
+
+// .Daily-Releases-wrapper h5,
+// .Curated-Playlists-wrapper h1,
+// .become-a-label-wrapper h1,
+// .become-a-label-wrapper h3,
+// .compare-planes-wrapper h1,
+// .music-source-wrapper h1,
+// .login-heading,
+// .privacy-policy-heading,
+// .privacy-policy-wrapper h4,
+// .complete-profile-wrapper h1 {
+//     color: #232323;
+// }
+.Daily-Releases-wrapper p,
+.Curated-Playlists-wrapper p,
+.become-a-label-wrapper p,
+.music-source-wrapper p,
+.privacy-policy-wrapper p,
+.compare-planes-wrapper p,
+.privacy-policy-wrapper ul,
+.Daily-Releases-wrapper ul{
+    color: #808080;
+}
+.library-section p {
+    color: #f9f9f9;
+}
+.be-dark-mode input:-webkit-autofill,
+.be-dark-mode input:-webkit-autofill:hover,
+.be-dark-mode input:-webkit-autofill:focus,
+.be-dark-mode input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgb(36, 36, 36) inset !important;
+    -webkit-text-fill-color: #fff;
+    border-radius: 0px;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgb(255, 255, 255) inset !important;
+    -webkit-text-fill-color: #8a8a8a;
+}
+.align-err {
+    display: flex;
+    align-items: unset;
+}
+
+
+// custom-media-query-start
+
+@media screen and (min-width: 1600px) and (max-width:1920px) { 
+
+// dashboard-page
+.input-group ::placeholder{
+    font-size: 20px !important;
+}
+
+.form-control{
+    padding: 18px 10px !important;
+}
+
+.input-group-text{
+    font-size: 20px;
+}
+
+.search-category-song {
+    font-size: 18px !important;
+}
+
+.category-selector {
+    height: 50px;
+    font-size: 20px;
+}
+
+.tranding-list-heading {
+    font-size: 24px;
+}
+
+.play-song h4 {
+    width: 220px;
+    font-size: 18px;
+}
+
+.play-song p {
+    width: 200px;
+    font-size: 16px;
+}
+
+.play-list {
+    height: 40px;
+    width: 40px;
+}
+
+.play-list h4 {
+    font-size: 18px;
+    padding-top: 2px;
+}
+
+.play-icon1 {
+    font-size: 26px;
+}
+
+.customHeader th .text {
+    font-size: 18px;
+}
+
+ .material-table a {
+    font-size: 18px;
+}
+
+.material-table td {
+    font-size: 18px;
+}
+
+.small {
+    height: 35px;
+    width: 35px;
+}
+
+.material-table tbody tr {
+    height: 55px;
+}
+// dashboard-page-end
+
+
+// playlist-page
+.playlist-card p {
+    font-size:17px;
+}
+// playlist-page-end
+
+
+// support-page-start
+.support-heading {
+    font-size: 45px !important;
+    margin-top: 8rem;
+}
+
+.accordion-wrapper .accordion-button {
+    font-size: 28px !important;
+}
+
+.accordion-wrapper .accordion-body {
+    font-size: 20px;
+}
+// support-page-end
+
+
+// privacy-policy-page
+
+.privacy-policy-heading {
+    font-size: 45px;
+}
+
+.privacy-policy-wrapper ul {
+    font-size: 20px;
+}
+
+.privacy-policy-wrapper h4 {
+    font-size: 28px;
+}
+
+.privacy-policy-wrapper p {
+    font-size: 20px;
+}
+// privacy-policy-page-end
+
+
+// contact-us-page
+.contact-us-heading {
+    font-size: 40px;
+    margin-top: 2rem;
+}
+.contact-us-form p {
+    font-size: 20px !important;
+}
+
+.contact-us-form label {
+    font-size: 18px !important;
+}
+
+.contact-us-form input {
+margin-bottom: 1rem !important;
+}
+
+.contact-us-form{
+    margin: 4rem 0rem;
+}
+
+.contact-us-form ::placeholder{
+    font-size: 20px !important;
+}
+
+//contact-us-page-end
+
+// sign-up-page-start
+.login-wraaper ::placeholder{
+    font-size: 22px;
+}
+
+.login-wraaper .form-check label{
+font-size: 18px !important;
+}
+
+.login-wraaper .form-check input {
+    font-size: 18px;
+}
+
+
+// sign-up-page-end
+
+}
+
+@media screen and (min-width: 1920px) and (max-width:2500px) {
+
+ // dashboard-page-start
+.nav-link {
+    font-size: 24px;
+}
+.navbar-nav{
+    margin-left: 25px;
+}
+.small {
+    height: auto;
+    width: auto;
+}
+
+.table-play-btn i {
+    line-height: normal;
+    font-size: 26px !important;
+    padding-top: 4px;
+}
+
+nav.navbar {
+    padding: 2rem 0rem !important;
+}
+
+
+
+.input-group ::placeholder{
+    font-size: 24px !important;
+}
+
+.form-control{
+    padding: 20px 10px !important;
+}
+
+.input-group-text{
+    font-size: 22px;
+}
+
+.search-category-song {
+    font-size: 22px !important;
+}
+
+.category-selector {
+    height: 60px;
+    font-size: 22px;
+}
+
+.tranding-list-heading {
+    font-size: 28px;
+    margin-top: 8rem !important;
+}
+
+.play-song h4 {
+    width: 300px;
+    font-size: 22px;
+}
+
+.play-song p {
+    width: 200px;
+    font-size:20px;
+}
+
+// .play-list {
+//     height:46px;
+//     width: 46px;
+// }
+
+.play-list h4 {
+    font-size: 21px;
+    padding-top: 2px;
+}
+
+.play-icon1 {
+    font-size:30px;
+}
+
+.customHeader th .text {
+    font-size:22px;
+}
+
+ .material-table a {
+    font-size: 21px;
+}
+
+.material-table td {
+    font-size: 21px;
+}
+
+.modes-switcher .form-check-input {
+    width: 75px;
+    height: 40px;
+}
+
+ #dropdownMenuButton1 {
+    font-size: 22px;
+}
+
+.country-flags img {
+    height: auto;
+    width: 100%;
+    height: 28px;
+}
+
+.dropdown-item {
+    font-size: 20px;
+}
+
+.pagination-section {
+    font-size: 22px;
+}
+
+.pagination-section p {
+    font-size: 20px;
+}
+
+.pagination-section select.form-select.form-select-sm {
+    width: 75px;
+    height: 45px;
+    font-size:20px;
+}
+
+.view-all-list a {
+    font-size: 22px;
+}
+
+.be-dark-mode .category-selector {
+    background-size: 25px;
+}
+
+.play-list{
+    height: 42px;
+    width: 42px;
+}
+// dashboard-page-end
+
+// playlist-page
+
+.playlist-card p {
+    font-size:20px;
+}
+// playlist-page-end
+
+
+// support-page-start
+.support-heading {
+    font-size: 55px !important;
+    margin-top: 8rem;
+}
+
+.accordion-wrapper .accordion-button {
+    font-size: 35px !important;
+}
+
+.accordion-wrapper .accordion-body {
+    font-size: 22px;
+}
+// support-page-end
+
+
+// privacy-policy-page
+
+.privacy-policy-heading {
+    font-size: 50px;
+}
+
+.privacy-policy-wrapper ul {
+    font-size: 24px;
+}
+
+.privacy-policy-wrapper h4 {
+    font-size: 32px;
+}
+
+.privacy-policy-wrapper p {
+    font-size: 24px;
+}
+// privacy-policy-page-end
+
+
+// contact-us-page
+.contact-us-heading {
+    font-size: 45px;
+    margin-top: 3rem;
+}
+.contact-us-form p {
+    font-size: 24px !important;
+}
+
+.contact-us-form ::placeholder{
+    font-size: 20px !important;
+}
+
+.contact-us-form label {
+    font-size: 22px !important;
+}
+
+.contact-us-form input {
+margin-bottom: 1rem !important;
+}
+
+.contact-us-form{
+    margin: 4rem 0rem;
+}
+
+//contact-us-page-end
+
+//contact-us-page-end
+
+.login-wraaper ::placeholder{
+    font-size: 22px;
+}
+
+.login-wraaper .form-check label{
+    font-size: 20px !important;
+    }
+    
+    .login-wraaper .form-check input {
+        font-size: 20px;
+    }
+// sign-up-page-start
+
+}
+// custom-media-query-end

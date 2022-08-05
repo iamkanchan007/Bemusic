@@ -1,0 +1,29 @@
+<div class="responsive-table">
+    <!-- <datatable-header pluralResourceName="title" [showSelectedActions]="false">
+    </datatable-header> -->
+    <table class="material-table">
+        <thead>
+        <tr class="customHeader">
+            <!-- <th table-header-checkbox></th> -->
+            <th trans>Invoice Id</th>
+            <th trans>Date</th>
+            <th trans>Plan</th>
+            <th trans>Payment Method</th>
+            <th trans>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let pays of paymentsdata; let _index = index">
+        <tr>
+            <td trans>#{{pays?.invoice_id || '-'}}</td>
+            <td trans>{{pays?.created_at | date:"MM/dd/yyyy"}}</td>
+            <td trans>{{pays?.plan?.name || '-'}}</td>
+            <td trans>{{pays?.method || '-'}}</td>
+            <td class="text-success" trans>{{pays?.plan?.currency_symbol}}{{pays?.plan?.amount || '-'}}</td>
+
+        </tr>
+      </ng-container>
+        </tbody>
+    </table>
+  </div>
+

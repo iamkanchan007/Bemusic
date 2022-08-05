@@ -1,0 +1,279 @@
+<div class="modal-header">
+    <h2 class="modal-title" mat-dialog-title *ngIf="data.user" trans>Update User Details</h2>
+    <h2 class="modal-title" mat-dialog-title *ngIf="!data.user" trans>Create a New User</h2>
+    <button type="button" (click)="close()" class="close-button no-style" tabindex="-1">
+        <mat-icon svgIcon="close"></mat-icon>
+    </button>
+</div>
+
+<form autocomplete="off" (ngSubmit)="confirm()" [formGroup]="form" *ngIf="errors$ | async as errors" ngNativeValidate>
+    <mat-dialog-content class="many-inputs">
+        <div class="input-container" *ngIf="!data.user">
+            <label for="crupdate-user-email" trans>Email</label>
+            <input type="email" id="crupdate-user-email" formControlName="email" required>
+            <div class="error" *ngIf="errors?.email">{{errors?.email}}</div>
+        </div>
+
+        <div class="input-container" *ngIf="!data.user">
+            <label for="crupdate-user-password" trans>Password</label>
+            <input type="password" id="crupdate-user-password" formControlName="password" required>
+            <div class="error" *ngIf="errors?.password">{{errors?.password}}</div>
+        </div>
+
+        <div class="row">
+            <!-- <h2 class="mat-dialog-title modal-title ng-star-inserted">Profile Details</h2>
+            <div class="col-sm-6">
+                <div class="input-container avatar-input-container">
+                    <upload-image-control [uploadConfig]="avatarUploadConfig()" class="inherit-size" formControlName="avatar"></upload-image-control>
+                    <div class="error" *ngIf="errors?.avatar">{{errors?.avatar}}</div>
+                </div>
+            </div> -->
+            <div class="col-sm-12">
+                <div>
+                    <input type="checkbox" id="crupdate-user-is_valid" formControlName="is_valid"> Is Approve
+                </div>
+            </div>
+            <div class="col-sm-6" *ngIf="data.user">
+                <div class="input-container" >
+                    <label for="crupdate-user-email" trans>Email</label>
+                    <input type="text" id="crupdate-user-email" formControlName="email" readonly>
+                    <div class="error" *ngIf="errors?.email">{{errors?.email}}</div>
+                </div>
+            </div>
+            <div class="col-sm-6" style="display: none;">
+                <div class="input-container">
+                    <label for="crupdate-user-username" trans>User Name</label>
+                    <input type="text" id="crupdate-user-username" formControlName="username">
+                    <div class="error" *ngIf="errors?.username">{{errors?.username}}</div>
+                </div>
+                
+            </div>
+            <div class="col-sm-6">
+
+                <div class="input-container">
+                    <label for="crupdate-user-first_name" trans>First Name</label>
+                    <input type="text" id="crupdate-user-first_name" formControlName="first_name">
+                    <div class="error" *ngIf="errors?.first_name">{{errors?.first_name}}</div>
+                </div>
+            </div>
+            <div class="col-sm-6" style="display: none;">
+                <div class="input-container">
+                    <label for="crupdate-user-company" trans>Company</label>
+                    <input type="text" id="crupdate-user-company" formControlName="company">
+                    <div class="error" *ngIf="errors?.company">{{errors?.company}}</div>
+                </div>
+              
+               
+            </div>
+            <div class="col-sm-6">
+                
+                  <div class="input-container">
+                    <label for="crupdate-user-last_name" trans>Last Name</label>
+                    <input type="text" id="crupdate-user-last_name" formControlName="last_name">
+                    <div class="error" *ngIf="errors?.last_name">{{errors?.last_name}}</div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-container">
+                    <label for="crupdate-user-phone" trans>Phone</label>
+                    <input type="text" id="crupdate-user-phone" formControlName="phone">
+                    <div class="error" *ngIf="errors?.phone">{{errors?.phone}}</div>
+                </div>
+               
+            </div>
+            <div class="col-sm-6">
+                <div class="input-container">
+                    <label for="crupdate-user-djname" trans>Djname</label>
+                    <input type="text" id="crupdate-user-djname" formControlName="djname">
+                    <div class="error" *ngIf="errors?.djname">{{errors?.djname}}</div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-container custom-class-dob">
+                   <label class="" trans>Date of Birth</label>
+                    <input matInput [matDatepicker]="dp3" class="" disabled  id="date" formControlName="dob">
+                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                </div>
+            </div>
+            <div class="col-sm-6">
+            <!-- </div>
+            <div class="col-sm-6"> -->
+                <div class="input-container">
+                    <label for="crupdate-user-djtype" trans>Type of Dj</label>
+                    <!-- <input type="text" id="crupdate-user-djtype" formControlName="djtype"> -->
+                    
+                    <select class=""
+                        aria-label="Default select example" formControlName="djtype">
+                        <option value="" selected trans>---Select---</option>
+                        <option  *ngFor="let item of djTypes" value="{{item.model.id}}" trans>{{item.model.name}}</option>
+                    </select>
+                    <div class="error" *ngIf="errors?.djtype">{{errors?.djtype}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="input-container">
+                    <label for="crupdate-user-regular_perform_location" trans>Where Do You Regularly Perform?</label>
+                    <input type="text" id="crupdate-user-regular_perform_location" formControlName="regular_perform_location">
+                    <div class="error" *ngIf="errors?.regular_perform_location">{{errors?.regular_perform_location}}</div>
+ 
+                    <input type="text" id="crupdate-user-regular_perform_location1" formControlName="regular_perform_location1">
+                    <div class="error" *ngIf="errors?.regular_perform_location">{{errors?.regular_perform_location1}}</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-container">
+                    <label for="crupdate-user-regular_perform_location2" trans></label>
+                    <input type="text" id="crupdate-user-regular_perform_location2" formControlName="regular_perform_location2">
+                    <div class="error" *ngIf="errors?.regular_perform_location2">{{errors?.regular_perform_location2}}</div>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;">
+            <div class="input-container" [class.resend-button-visible]="shouldShowResendButton()">
+                <label for="crupdate-user-confirmed" trans>Email Confirmed</label>
+                <div class="confirmed-select-wrapper">
+                    <select id="crupdate-user-confirmed" formControlName="email_verified_at">
+                        <option [ngValue]="true" trans>Yes</option>
+                        <option [ngValue]="false" trans>No</option>
+                    </select>
+                    <button mat-flat-button color="accent" type="button" class="resend-confirmation-button" [disabled]="loading$ | async" (click)="sendEmailConfirmation()" trans>Resend</button>
+                </div>
+                <div class="error" *ngIf="errors?.email_verified_at">{{errors?.email_verified_at}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">              
+                  <div class="input-container">
+                    <label for="crupdate-user-website" trans>Website</label>
+                    <input type="text" id="crupdate-user-website" formControlName="website">
+                    <div class="error" *ngIf="errors?.website">{{errors?.website}}</div>
+                </div>
+               
+            </div>
+            <div class="col-sm-6">              
+                  <div class="input-container">
+                    <label for="crupdate-user-instagram" trans>Instagram</label>
+                    <input type="text" id="crupdate-user-instagram" formControlName="instagram">
+                    <div class="error" *ngIf="errors?.instagram">{{errors?.instagram}}</div>
+                </div>
+               
+            </div>
+            <div class="col-sm-6">              
+                  <div class="input-container">
+                    <label for="crupdate-user-facebook" trans>Facebook</label>
+                    <input type="text" id="crupdate-user-facebook" formControlName="facebook">
+                    <div class="error" *ngIf="errors?.facebook">{{errors?.facebook}}</div>
+                </div>
+               
+            </div>
+            <div class="col-sm-6">              
+                  <div class="input-container">
+                    <label for="crupdate-user-twitter" trans>Twitter</label>
+                    <input type="text" id="crupdate-user-twitter" formControlName="twitter">
+                    <div class="error" *ngIf="errors?.twitter">{{errors?.twitter}}</div>
+                </div>
+               
+            </div>
+        </div>
+
+
+        <div class="input-container">
+            <label for="crupdate-user-new-number_of_people_perform_weekly" trans>How Many People Do You Perform For Weekly*</label>
+            <div class="input-with-action">
+                 <input type="number" id="crupdate-user-number_of_people_perform_weekly" formControlName="number_of_people_perform_weekly">
+                    <div class="error" *ngIf="errors?.number_of_people_perform_weekly">{{errors?.number_of_people_perform_weekly}}</div>
+            </div>
+        </div>
+
+        <div class="input-container" *ngIf="data.user">
+            <label for="crupdate-user-new-password" trans>New Password</label>
+            <div class="input-with-action">
+                <input type="text" id="crupdate-user-new-password" formControlName="password">
+                <button type="button" mat-flat-button color="accent" (click)="generateNewPassword()" trans>Generate</button>
+            </div>
+        </div>
+
+        <div style="display: none;">
+            <space-input label="Available Space" formControlName="available_space">
+                <p class="description" trans>Disk space available to user. If left empty, it will be inherited from value set in "admin -> settings -> uploading" page.</p>
+                <div class="error" *ngIf="errors?.available_space">{{errors?.available_space}}</div>
+            </space-input>
+        </div>
+
+        <role-manager formControlName="roles"></role-manager>
+        <div class="error" *ngIf="errors?.roles">{{errors?.roles}}</div>
+
+
+        <div class="row">
+            <h2 class="mat-dialog-title modal-title ng-star-inserted">Address Details</h2>
+            <div class="col-sm-12">
+                <div class="input-container">
+                    <label for="crupdate-user-address" trans>Address</label>
+                    <input type="text" id="crupdate-user-address" formControlName="address">
+                    <div class="error" *ngIf="errors?.address">{{errors?.address}}</div>
+                </div>
+            </div>
+             <div class="col-sm-12">
+                <div class="input-container">
+                    <label for="crupdate-user-suite_apt" trans>Suite / Apt</label>
+                    <input type="text" id="crupdate-user-suite_apt" formControlName="suite_apt">
+                    <div class="error" *ngIf="errors?.suite_apt">{{errors?.suite_apt}}</div>
+                </div>
+            </div>
+            
+             
+            <div class="col-sm-6">
+                <div class="input-container">
+                    <label for="crupdate-user-city" trans>City</label>
+                    <input type="text" id="crupdate-user-city" formControlName="city">
+                    <div class="error" *ngIf="errors?.city">{{errors?.city}}</div>
+                </div>
+            </div>
+             <div class="col-sm-6">
+                <div class="input-container">
+                    <label for="crupdate-user-zipcode" trans>Zip code</label>
+                    <input type="text" id="crupdate-user-zipcode" formControlName="zipcode">
+                    <div class="error" *ngIf="errors?.zipcode">{{errors?.zipcode}}</div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-container">
+                    <label for="crupdate-user-suite_apt" trans>State</label>
+                    <select class="" formControlName="state">
+                        <option value="" selected trans>{{form.get('country').value?'---Select---':'Before select country'}}</option>
+                        <option value="{{state.name}}" *ngFor="let state of states" trans>{{state.name}}</option>
+                    </select>
+                    <div class="error" *ngIf="errors?.state">{{errors?.state}}</div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-container">
+                    <label for="crupdate-user-country" trans>Country</label>
+                    <select class="" formControlName="country" (change)="getStates($event.target.value)">
+                        <option value=" " selected trans>---Select---</option>
+                        <option value="{{country.name}}" *ngFor="let country of countries" trans>{{country.name}}</option>
+                    </select>
+                    <div class="error" *ngIf="errors?.country">{{errors?.country}}</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div style="display: none;">
+            <permission-manager formControlName="permissions" *ngIf="currentUser.hasPermission('permissions.update')"></permission-manager>
+            <div class="error" *ngIf="errors?.permissions">{{errors?.permissions}}</div>
+        </div>
+    </mat-dialog-content>
+
+    <div class="buttons right mat-dialog-actions" mat-dialog-actions>
+        <button (click)="close()" type="button" mat-button class="button cancel" trans>Cancel</button>
+        <button type="submit" class="button primary" mat-raised-button color="accent" [disabled]="loading$ | async">
+            <span *ngIf="data.user" trans>Update User</span>
+            <span *ngIf="!data.user" trans>Create User</span>
+        </button>
+    </div>
+</form>

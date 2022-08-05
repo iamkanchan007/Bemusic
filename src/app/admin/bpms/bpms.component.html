@@ -1,0 +1,41 @@
+<div class="datatable responsive-table">
+    <datatable-header pluralResourceName="bpm">
+        <ng-container leftContent>
+            <button mat-raised-button color="accent" (click)="openCrupdateSubgenreModal()" trans>Add</button>
+        </ng-container>
+        <button rightContent mat-raised-button color="accent" (click)="confirmGenresDeletion()" trans>Delete Selected</button>
+    </datatable-header>
+    <table class="material-table">
+        <thead>
+        <tr>
+            <th table-header-checkbox></th>
+            <th table-sort-header="name" trans>Name</th>
+           <!--  <th table-sort-header trans>Display Name</th> -->
+            <!-- <th table-sort-header="artists_count" trans>Parent Genre</th> -->
+            <th table-sort-header="updated_at" trans>Last Updated</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let bpm of bpms$ | async">
+            <td [table-body-checkbox]="bpm.id"></td>
+            <td>
+                <div class="column-with-image">
+                    {{bpm.name}}
+                </div>
+            </td>
+
+            <td data-label="Last Updated">{{bpm.updated_at | formattedDate}}</td>
+            <td class="edit-column">
+                <button mat-icon-button (click)="openCrupdateSubgenreModal(bpm)" [matTooltip]="'Edit bpm' | trans">
+                    <mat-icon svgIcon="edit"></mat-icon>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <no-results-message svgImage="folder.svg" *ngIf="datatable.paginator.noResults$ | async">
+        <span primary-text>No genres have been created yet</span>
+    </no-results-message>
+    <datatable-footer></datatable-footer>
+</div>

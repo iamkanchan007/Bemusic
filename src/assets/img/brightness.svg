@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 25 25">
+  <defs>
+    <filter id="Ellipse_1" x="-8" y="-8" width="41" height="41" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-brightness">
+      <rect width="25" height="25"/>
+    </clipPath>
+  </defs>
+  <g id="brightness" clip-path="url(#clip-brightness)">
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Ellipse_1)">
+      <circle id="Ellipse_1-2" data-name="Ellipse 1" cx="11.5" cy="11.5" r="11.5" transform="translate(1 1)" fill="#fff"/>
+    </g>
+    <path id="brightness-high-fill" d="M11.633,7.756A3.878,3.878,0,1,1,7.756,3.878,3.878,3.878,0,0,1,11.633,7.756ZM7.756,0A.485.485,0,0,1,8.24.485V2.424a.485.485,0,0,1-.969,0V.485A.485.485,0,0,1,7.756,0Zm0,12.6a.485.485,0,0,1,.485.485v1.939a.485.485,0,1,1-.969,0V13.087A.485.485,0,0,1,7.756,12.6Zm7.756-4.847a.485.485,0,0,1-.485.485H13.087a.485.485,0,1,1,0-.969h1.939A.485.485,0,0,1,15.511,7.756Zm-12.6,0a.485.485,0,0,1-.485.485H.485a.485.485,0,1,1,0-.969H2.424A.485.485,0,0,1,2.908,7.756ZM13.24,2.271a.485.485,0,0,1,0,.685L11.869,4.329a.485.485,0,1,1-.685-.686l1.371-1.371A.485.485,0,0,1,13.24,2.271ZM4.328,11.183a.485.485,0,0,1,0,.685L2.957,13.24a.485.485,0,1,1-.685-.685l1.371-1.371A.485.485,0,0,1,4.328,11.183ZM13.24,13.24a.485.485,0,0,1-.685,0l-1.371-1.371a.485.485,0,1,1,.685-.685l1.371,1.371A.485.485,0,0,1,13.24,13.24ZM4.328,4.329a.485.485,0,0,1-.685,0L2.271,2.957a.485.485,0,1,1,.685-.685L4.328,3.642a.485.485,0,0,1,0,.686Z" transform="translate(4.721 4.768)" fill="#ba0000"/>
+  </g>
+</svg>

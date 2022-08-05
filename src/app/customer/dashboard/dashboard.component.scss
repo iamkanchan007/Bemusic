@@ -1,0 +1,41 @@
+@import "../../../scss/variables";
+.selected {
+  background-color: mat-color($app-background, hover);
+}
+.cdk-drop-list-dragging tr {
+  pointer-events: none;
+}
+tr.playing {
+  color: mat-color($app-accent, default);
+
+  .number-column, .like-column, .duration-column {
+    color: inherit;
+  }
+}
+tr, tr.playing {
+  .number {
+    display: none;
+  }
+
+  playback-control-button {
+    display: flex;
+    background-color: mat-color($app-foreground, base);
+    color: mat-color($app-background, raised-button);
+    margin: 0;
+  }
+}
+.text-download{
+  color:#FF4646 !important;
+  playback-control-button {
+    display: flex;
+    background-color: #FF4646 !important;
+    color: mat-color($app-background, raised-button);
+    margin: 0;
+  }
+}
+.no-results-message {
+  margin-top: 60px;
+}
+.downloadDisable{
+  pointer-events: none;
+}

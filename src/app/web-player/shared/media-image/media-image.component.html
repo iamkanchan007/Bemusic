@@ -1,0 +1,2 @@
+<!-- <img [alt]="alt()" draggable="false" [defaultImage]="defaultImage()" [lazyLoad]="src"> -->
+<img  draggable="false"  [lazyLoad]="src" (error)="handleMissingImage($event)" >

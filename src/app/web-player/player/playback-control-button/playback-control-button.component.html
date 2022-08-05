@@ -1,0 +1,13 @@
+<button class="play-button child-target-mat table-play-btn" mat-icon-button [class.visible]="!trackIsPlaying()" (click)="play.emit(); $event.stopPropagation()">
+    <!-- <mat-icon svgIcon="play-arrow" class="song-play-icon"></mat-icon> -->
+    <i class="bi bi-play-fill ps-1"></i>
+</button>
+
+<button class="pause-button table-play-btn" mat-icon-button [class.visible]="trackIsPlaying()" (click)="pause.emit(); $event.stopPropagation()">
+    <!-- <mat-icon svgIcon="pause"></mat-icon> -->
+    <i class="bi bi-pause-fill"></i>
+</button>
+
+<playing-indicator [class.visible]="trackIsPlaying()" class="song-play-indicator"></playing-indicator>
+
+<ng-content></ng-content>

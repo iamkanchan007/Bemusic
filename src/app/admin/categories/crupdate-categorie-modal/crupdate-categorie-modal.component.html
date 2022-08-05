@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h2 class="modal-title" mat-dialog-title trans>
+        <span *ngIf="updating" trans>Update Category</span>
+        <span *ngIf="!updating" trans>New Category</span>
+    </h2>
+    <button type="button" (click)="close()" tabindex="-1" class="close-button no-style icon-button">
+        <mat-icon svgIcon="close"></mat-icon>
+
+    </button>
+</div>
+
+<form (ngSubmit)="confirm()" [formGroup]="form">
+    <mat-dialog-content class="many-inputs">
+        <div class="input-container">
+            <label for="genre-name" trans>Name</label>
+            <input type="text" id="genre-name" formControlName="name" required>
+            <div class="error" *ngIf="formSubmit && iserror()">This is a required field.</div>
+        </div>
+        <div class="input-container custom-mat-multiselect" style="display:none">
+            <label for="user" trans>Genres</label>
+            <mat-form-field appearance="fill">
+                <mat-select  formControlName="genres" multiple>
+                    <mat-option *ngFor="let gen of genereList" [value]="gen">{{gen}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <chip-input placeholder="+Add genre" [suggestFn]="suggestGenreFn" formControlName="genres"></chip-input> -->
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button (click)="close()" type="button" mat-button class="cancel-button" trans>Close</button>
+        <button type="submit" mat-raised-button color="accent" class="submit-button" trans>
+            <span *ngIf="updating" trans>Update</span>
+            <span *ngIf="!updating" trans>Create</span>
+        </button>
+    </mat-dialog-actions>
+
+    <loading-indicator [isVisible]="loading" class="overlay opacity-high"></loading-indicator>
+</form>

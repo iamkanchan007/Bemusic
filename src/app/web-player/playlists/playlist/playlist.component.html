@@ -1,0 +1,26 @@
+<header class="media-page-header" [contextMenu]="{item: playlist, type: 'playlist'}">
+    <div class="flex-container">
+        <div class="col-md-6">
+            <h4 *ngIf="playlist && playlist['image']" class="playlist-details-heading mt-5 mb-3">{{playlist['name']}}
+            </h4>
+            <!-- <media-image class="header-image" [media]="playlist"></media-image> -->
+        </div>
+    </div>
+</header>
+
+<ng-template [ngIf]="datatable.paginator.noResults$ | async" [ngIfElse]="notEmptyList">
+    <div class="no-results-message">
+        <mat-icon class="icon" svgIcon="audiotrack"></mat-icon>
+        <div class="text">
+            <div class="main" trans>Nothing to display.</div>
+            <div class="secondary" trans>This playlist does not have any tracks yet.</div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #notEmptyList>
+    <track-list [contextMenuParams]="{type: 'playlistTrack', extra: {playlistId: playlist.id}}" [showArtist]="true"
+        [showAlbum]="true" (delete)="removeTracksFromPlaylist($event)" (orderChanged)="reorderPlaylist($event)"
+        [dataSource]="datatable" [queueItemId]="queueId()">
+    </track-list>
+</ng-template>

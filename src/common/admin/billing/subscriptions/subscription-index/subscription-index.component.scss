@@ -1,0 +1,40 @@
+.column-with-image img, .material-table .column-with-image img {
+    display: none !important;
+}
+
+.custom-track-total .mat-icon {
+    color: #00ff22;
+    opacity: 0.8;
+    width: 60px;
+    height: 60px;
+}
+.custom-track-total .details {
+    margin-left: 10px;
+}
+.custom-track-total .details .name {
+    font-size: 1.4rem;
+    
+}
+
+.custom-track-total .details .count {
+    font-size: 2.3rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.custom-track-total .stat {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-right: 25px;
+    border-radius: 4px;
+    height: 110px;
+    align-items: center;
+    background-color: #181818;
+    box-shadow: none;
+    border: 1px solid #ffffff1f;
+    padding: 0 15px;
+    max-width: 275px;
+}
+.custom-track-total {
+    display: flex;
+}

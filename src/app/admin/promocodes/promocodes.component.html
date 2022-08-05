@@ -1,0 +1,49 @@
+<div class="datatable responsive-table">
+    <datatable-header pluralResourceName="promocodes">
+        <ng-container leftContent>
+            <button mat-raised-button color="accent" (click)="openCrupdateSubgenreModal()" trans>Add</button>
+        </ng-container>
+        <button rightContent mat-raised-button color="accent" (click)="confirmPromoDeletion()" trans>Delete Selected</button>
+    </datatable-header>
+    <table class="material-table">
+        <thead>
+        <tr>
+            <th table-header-checkbox></th>
+            <th table-sort-header="name" trans>Name</th>
+            <th table-sort-header="how_long" trans>Valid For (In months)</th>
+            <th table-sort-header="discount" trans>Discount(%)</th>
+           <!--  <th table-sort-header trans>Display Name</th> -->
+            <!-- <th table-sort-header="artists_count" trans>Parent Genre</th> -->
+            <th table-sort-header="valid_from" trans>Valid From</th>
+            <th table-sort-header="valid_to" trans>Valid Till</th>
+            <th table-sort-header="updated_at" trans>Last Updated</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let promo of promocodes$ | async">
+            <td [table-body-checkbox]="promo.id"></td>
+            <td>
+                <div class="column-with-image">
+                    {{promo.name}}
+                </div>
+            </td>
+
+            <td data-label="Last Updated">{{promo.how_long}}</td>
+            <td data-label="Last Updated">{{promo.discount}}</td>
+            <td data-label="Last Updated">{{promo.valid_from | formattedDate}}</td>
+            <td data-label="Last Updated">{{promo.valid_to | formattedDate}}</td>
+            <td data-label="Last Updated">{{promo.updated_at | formattedDate}}</td>
+            <td class="edit-column">
+                <button mat-icon-button (click)="openCrupdateSubgenreModal(promo)" [matTooltip]="'Edit promo' | trans">
+                    <mat-icon svgIcon="edit"></mat-icon>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <no-results-message svgImage="folder.svg" *ngIf="datatable.paginator.noResults$ | async">
+        <span primary-text>No genres have been created yet</span>
+    </no-results-message>
+    <datatable-footer></datatable-footer>
+</div>

@@ -1,0 +1,155 @@
+@import "variables";
+
+.disableselect{
+  pointer-events: none;
+}
+:host {
+  display: block;
+}
+
+.inline-form {
+  display: flex;
+
+  .actions {
+    flex-shrink: 0;
+    color: mat-color($app-foreground, icon);
+    margin-left: 20px;
+  }
+}
+.defaultcheckbox {
+    float: left;
+    width: 5% !important;
+    margin-top: 40px !important;
+}
+.version-section{
+  margin: 50px 0;
+  display: block;
+}
+.custrackform label {
+    margin-top: 15px !important;
+}
+.addversion {
+  font-size: 20px;
+  margin-top: 20px;
+}
+.removeversion {
+  font-size: 20px;
+
+}
+.addversion-section {
+    width: 100%;
+    text-align: right;
+    display: block;
+    padding: 20px 0;
+}
+.defaultcheckboxbutton {
+    float: left;
+    width: 30% !important;
+    margin-left: 1%;
+    margin-top: 45px !important;
+}
+.remove-section{
+  position: absolute;
+    right: 6%;
+}
+.full-form {
+  overflow: hidden;
+}
+
+.full-form-container {
+  display: flex;
+
+  &.inside-album {
+    margin: 25px 100px 0 60px;
+  }
+}
+
+.fields-container {
+  flex: 1 1 auto;
+  margin-left: 20px;
+  min-width: 0;
+}
+
+.cdk-drag-handle {
+  flex-shrink: 0;
+  color: mat-color($app-foreground, icon);
+  margin-right: 20px;
+}
+
+.active {
+  color: mat-color($app-accent, default);
+}
+
+track-upload-header {
+  margin-bottom: 15px;
+}
+
+.drag-handle {
+  cursor: move;
+}
+
+.left-column-action-button {
+  margin-top: 15px;
+  width: 100%;
+  line-height: 40px;
+}
+
+@media only screen and (max-width: $medium) {
+  .full-form-container {
+    display: block;
+  }
+
+  .left-column {
+    max-width: 220px;
+    margin: auto;
+    margin-bottom: 25px;
+  }
+
+  .fields-container {
+    margin-left: 0;
+  }
+}
+
+.input-container input:focus {
+    box-shadow: none !important;
+}
+.mat-form-field {
+    width: 100%;
+}
+.mat-slide-toggle-input {
+    border: 0 !important;
+}
+
+.input-container mat-slide-toggle input {
+    border: 0 !important;
+}
+mat-slide-toggle {
+    float: left;
+    width: 10% !important;
+    margin-top: 61px;
+}
+.input-container .error {
+    float: left;
+}
+.mat-pseudo-checkbox.mat-pseudo-checkbox-checked {
+    border-color: #00FF22 !important;
+    background: #fff;
+}
+.mat-selected {
+    color: #00FF22 !important;
+}
+.mat-pseudo-checkbox::after {
+    color: #fff !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: transparent;
+}
+
+.cdk-drop-list .cdk-drag {
+    border: 1px solid #343434;
+    padding: 15px;
+}
+select option {
+    text-transform: capitalize;
+}

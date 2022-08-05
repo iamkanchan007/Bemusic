@@ -1,0 +1,36 @@
+@import "variables";
+
+.mat-progress-bar {
+  position: absolute;
+  top: 110px;
+}
+
+.pie-wrapper {
+    max-width: 100%;
+}
+.custom-piechart {
+    position: relative;
+    padding-bottom: 15px;
+}
+ul.custom-piechart-ul {
+    position: absolute;
+    top: 160px;
+    left: 50px;
+}
+.custom-piechart-ul li {
+    list-style: none;
+    padding: 2px;
+}
+
+.custom-color-circle {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+ul.custom-piechart-ul {
+    border: 1px solid;
+    padding: 15px;
+    background-color: #b4cf9c1a;
+}

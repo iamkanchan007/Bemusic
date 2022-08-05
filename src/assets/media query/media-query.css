@@ -1,0 +1,93 @@
+@media only screen and (max-width:991px) {
+    /* header */
+    .navbar-brand img {
+        width: 100%;
+    }
+
+    .navbar-brand {
+        margin-right: 0px !important;
+        width: 42%;
+    }
+
+    .collapse:not(.show) {
+        display: block; 
+    }
+    .navbar-collapse {
+        display: flex !important;
+        width: max-content;
+    }
+    .navbar{
+        flex-wrap: nowrap;
+    }
+     /* header-end */
+     .Curated-Playlists-wrapper img {
+        width: 100% !important;
+    }
+    .library-section img {
+        width: 100% !important;
+    }
+    .rocord-pool h1 {
+        font-size: 45px;
+    }
+
+  }
+
+  @media only screen and (max-width:767px){
+  /* Footer */
+  .footer-links{
+    width: 50%;
+    margin: 1rem 0;
+}
+
+.Curated-Playlists-wrapper img {
+    position: relative;
+     left: 0% !important;
+    width: 100% !important;
+}
+.library-section img {
+    position: relative;
+ left:0% !important;
+    width: 100% !important;
+}
+table.table.text-center {
+    display: block;
+    overflow-x: scroll;
+}
+.music-source-wrapper .row{
+    text-align: center;
+}
+.music-source-wrapper img {
+    padding: 0.5rem;
+}
+  }
+  @media (min-width: 576px){
+.modal-dialog {
+    max-width: 700px;
+    margin: 1.75rem auto;
+}
+
+}
+
+
+@media only screen and (max-width:320px){
+    /* header */
+    .btn{
+        padding: 5px 8px;
+        font-size: 14px;
+    }
+    .navbar-brand {
+        margin-right: 5px;
+    }
+   /* header-end */
+
+   /* Disclaimer-box */
+
+   .Disclaimer-border{
+    padding: 1.5rem 1rem 1rem 1rem;
+   }
+
+   /* Disclaimer-box-end */
+   .rocord-pool h1 {
+    font-size: 40px;
+}
+}

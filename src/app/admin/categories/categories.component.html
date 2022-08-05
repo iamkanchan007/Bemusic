@@ -1,0 +1,36 @@
+<div class="datatable responsive-table">
+    <datatable-header pluralResourceName="categories">
+        <ng-container leftContent>
+            <button mat-raised-button color="accent" (click)="openCrupdateGenreModal()" trans>Add</button>
+        </ng-container>
+        <button rightContent mat-raised-button color="accent" (click)="confirmGenresDeletion()" trans>Delete Selected</button>
+    </datatable-header>
+    <table class="material-table">
+        <thead>
+        <tr>
+            <th table-header-checkbox></th>
+            <th table-sort-header="name" trans>Name</th>
+            <th table-sort-header="updated_at" trans>Last Updated</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let genre of categories$ | async">
+            <td [table-body-checkbox]="genre.id"></td>
+            <td>
+                   {{genre.name}}
+            </td>
+            <td data-label="Last Updated">{{genre.updated_at | formattedDate}}</td>
+            <td class="edit-column">
+                <button mat-icon-button (click)="openCrupdateGenreModal(genre)" *ngIf="currentUser.hasPermission('genres.update')" [matTooltip]="'Edit genre' | trans">
+                    <mat-icon svgIcon="edit"></mat-icon>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <no-results-message svgImage="folder.svg" *ngIf="datatable.paginator.noResults$ | async">
+        <span primary-text>No genres have been created yet</span>
+    </no-results-message>
+    <datatable-footer></datatable-footer>
+</div>

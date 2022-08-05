@@ -1,0 +1,83 @@
+<div class="custom-track-total">
+<div class="stat ng-star-inserted">
+    <mat-icon [svgIcon]="headerData[3].icon"></mat-icon>
+    <div class="details">
+        <div class="name">{{headerData[3].name}}</div>
+        <div class="count ng-star-inserted">{{headerData[3].value}}</div>
+    </div>
+</div>
+
+<div class="stat ng-star-inserted">
+    <mat-icon [svgIcon]="headerData[4].icon"></mat-icon>
+    <div class="details">
+        <div class="name">{{headerData[4].name}}</div>
+        <div class="count ng-star-inserted">{{headerData[4].value}}</div>
+    </div>
+</div>
+
+<div class="stat ng-star-inserted">
+    <mat-icon [svgIcon]="headerData[5].icon"></mat-icon>
+    <div class="details">
+        <div class="name">{{headerData[5].name}}</div>
+        <div class="count ng-star-inserted">{{headerData[5].value}}</div>
+    </div>
+</div>
+</div>
+<div class="datatable responsive-table">
+    <datatable-header pluralResourceName="subscriptions">
+        <!-- <ng-container leftContent>
+            <button mat-raised-button color="accent" headerActions [disabled]="loading$ | async" (click)="openCrupdateSubscriptionModal()" *ngIf="currentUser.hasPermission('subscriptions.create')" trans>Add</button>
+        </ng-container> -->
+        <ng-template #tableFilters>
+            <subscription-index-filters></subscription-index-filters>
+        </ng-template>
+    </datatable-header>
+    <table class="material-table">
+        <thead>
+        <tr>
+            <th trans>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gateway</th>
+            <th trans>Cancelled</th>
+            <!-- <th trans>On Grace Period</th> -->
+            <th>Renews At</th>
+            <!-- <th>Ends At</th> -->
+            <th>Created</th>
+            <th>Active</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let subscription of subscriptions$ | async">
+            <td>
+                <div class="email secondary">{{ subscription.user.email}}</div>
+            </td>
+            <td>
+                {{ subscription.user.first_name}}
+            </td>
+            <td>
+                {{ subscription.user.last_name}}
+            </td>
+            <td data-label="Gateway">{{subscription.gateway}}</td>
+            <td data-label="Cancelled">{{subscription.cancelled ? 'Yes' : 'No' }}</td>
+            <!-- <td data-label="On Grace Period">{{subscription.on_grace_period ? 'Yes' : 'No' }}</td> -->
+            <td data-label="Renews At">{{subscription.renews_at ? (subscription.renews_at | formattedDate) : '-'}}</td>
+            <td data-label="Ends At">{{subscription.created_at ? (subscription.created_at | formattedDate) : '-'}}</td>
+            <!-- <td data-label="Created At">{{subscription.created_at | formattedDate}}</td> -->
+            <td><mat-slide-toggle trans [checked]="subscription.enable? true: false" (change)="toggleEnable($event, subscription.id)"></mat-slide-toggle></td>
+            <td class="edit-column">
+                <ng-container *ngIf="currentUser.hasPermission('subscriptions.delete')">
+                    <!-- <button mat-icon-button (click)="openCrupdateSubscriptionModal(subscription)" [matTooltip]="'Edit' | trans"><mat-icon svgIcon="edit"></mat-icon></button>
+                    <button mat-icon-button (click)="maybeCancelSubscription(subscription)" [disabled]="subscription.cancelled" [matTooltip]="'Cancel/Suspend' | trans"><mat-icon svgIcon="pause"></mat-icon></button> -->
+                    <button mat-icon-button (click)="maybeDeleteSubscription(subscription)" [matTooltip]="'Delete' | trans"><mat-icon svgIcon="delete"></mat-icon></button>
+                </ng-container>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <no-results-message svgImage="subscriptions.svg" *ngIf="datatable.paginator.noResults$ | async">
+        <span primary-text trans>No subscriptions have been created yet</span>
+    </no-results-message>
+    <datatable-footer></datatable-footer>
+</div>

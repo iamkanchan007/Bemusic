@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h2 class="modal-title" mat-dialog-title trans>
+        <span *ngIf="updating" trans>Update Promo Code</span>
+        <span *ngIf="!updating" trans>New Promo Code</span>
+    </h2>
+    <button type="button" (click)="close()" tabindex="-1" class="close-button no-style icon-button">
+        <mat-icon svgIcon="close"></mat-icon>
+
+    </button>
+</div>
+
+<form (ngSubmit)="confirm()" [formGroup]="form" class="custom-create-promo">
+    <mat-dialog-content class="many-inputs">
+        <div class="input-container">
+            <label for="genre-name" trans>Name</label>
+            <input type="text" id="genre-name" formControlName="name" required>
+            <div class="error" *ngIf="formSubmit && iserror('name')">This is a reruired field.</div>
+        </div>
+        <div class="input-container">
+            <label for="genre-discount" trans>For Plan</label>
+            <select formControlName="for_plan">
+                <option value="">Please select plan</option>
+                <option *ngFor="let plan of planList" value="{{plan.id}}">{{plan.name}}</option>
+            </select>
+            <div class="error" *ngIf="formSubmit && iserror('for_plan')">This is a reruired field.</div>
+        </div>
+        <div class="input-container">
+            <label for="genre-discount" trans>Discount (%)</label>
+            <input type="number" id="genre-discount" formControlName="discount" required [readonly]="updating">
+            <div class="error" *ngIf="formSubmit && iserror('discount')">This is a reruired field.</div>
+        </div>
+        <div class="input-container">
+            <label for="genre-how_long" trans>Valid For (In months)</label>
+            <input type="number" id="genre-how_long" formControlName="how_long" required [readonly]="updating">
+            <div class="error" *ngIf="formSubmit && iserror('how_long')">This is a reruired field.</div>
+        </div>
+        <div class="input-container custom-is-infinite">
+            <label for="genre-how_long" trans>Is infinite</label>
+            <mat-slide-toggle trans [checked]="is_infinite? true: false" (change)="toggleEnable($event)"></mat-slide-toggle>
+        </div>
+        <div class="input-container date-picker-input-container matcustom-date-picker">
+            <label for="genre-valid_from" trans>Valid From</label>
+            <input matInput [matDatepicker]="dp3"  id="date" formControlName="valid_from"  [min]="mindate()" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            <div class="error" *ngIf="!is_infinite && formSubmit && iserror('valid_from')">This is a reruired field.</div>
+        </div>
+        <div class="input-container date-picker-input-container matcustom-date-picker">
+            <label for="genre-valid_to" trans>Valid Till</label>
+            <input matInput [matDatepicker]="dp32"   formControlName="valid_to"  [min]="mindate()" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp32"></mat-datepicker-toggle>
+            <mat-datepicker #dp32 disabled="false"></mat-datepicker>
+            <div class="error" *ngIf="!is_infinite && formSubmit && iserror('valid_to')">This is a reruired field.</div>
+        </div>
+        
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button (click)="close()" type="button" mat-button class="cancel-button" trans>Close</button>
+        <button type="submit" mat-raised-button color="accent" class="submit-button" trans>
+            <span *ngIf="updating" trans>Update</span>
+            <span *ngIf="!updating" trans>Create</span>
+        </button>
+    </mat-dialog-actions>
+
+    <loading-indicator [isVisible]="loading" class="overlay opacity-high"></loading-indicator>
+</form>

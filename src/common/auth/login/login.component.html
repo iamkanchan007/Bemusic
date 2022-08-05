@@ -1,0 +1,57 @@
+<section>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="login-wraaper">
+                    <div class="row">
+                        <h2 class="login-heading mb-5" trans>{{(auth.isLabel?'Label Login':'Login')}}</h2>
+                        <div class="col-md-12">
+                            <form (ngSubmit)="login()" [formGroup]="form" *ngIf="errResponse$ | async as errors"
+                                ngNativeValidate>
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <input id="email" type="text" class="form-control" name="email"
+                                            formControlName="email" placeholder="Email address" trans-placeholder required>
+                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    </div>
+                                    <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)"
+                                        class="error big-error">
+                                        <div *ngIf="form.controls['email'].errors.required" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon> Email is required!
+                                        </div>
+                                        <div *ngIf="form.controls['email'].errors?.pattern" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon> Invalid email!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group" id="show_hide_password">
+                                        <input type="password" name="password" formControlName="password"
+                                            autocomplete="current-password" required="" id="id_password"
+                                            class="form-control" placeholder="Password"  trans-placeholder required>
+                                        <span class="input-group-text show_hide_password">
+                                            <a><i class="bi bi-eye-slash" id="togglePassword"></i></a>
+                                        </span>
+                                    </div>
+                                    <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)"
+                                        class="error big-error">
+                                        <div *ngIf="form.controls['password'].errors.required" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon> Password is required!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn login-button mb-3" [disabled]="!form.valid" trans>LOGIN</button>
+                                <a href="javascript:void(0)" routerLink="/forgot-password" class="text-center d-block forgot-password" trans>Forgot
+                                    Password?</a>
+                                <p class="text-center sign-up" trans>Don't have an account yet? <a href="javascript:void(0)"
+                                        routerLink="/register" trans class="fw-bold">Sign Up</a></p>
+                                        <a href="javascript:void(0)" routerLink="/label-register" class="text-center mt-3 mb-5 d-block policy-links" trans>Become a label</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

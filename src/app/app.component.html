@@ -1,0 +1,6 @@
+<div class="app-content">
+    <header (onChangeFooterLines)="doSomething($event)" (hasAdmin)="hasAdmin($event)">
+    </header>
+    <router-outlet></router-outlet>
+    <footer [footerLines]="footerLines" [isAdmin]="isAdmin"></footer>
+</div>

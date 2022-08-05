@@ -1,0 +1,240 @@
+<section>
+    <div class="container-fluid">
+        <div class="complete-profile-wrapper">
+            <div class="row">
+                <h1 trans>Label Register</h1>
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="complete-profile-border mb-5">
+                        <div class="col-md-12">
+                            <h3 class="profile-details" trans>Profile details</h3>
+                            <!-- <hr> -->
+                            <form [formGroup]="profileForm" (ngSubmit)="save()">
+                                <div class="row mt-5">
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label class="form-label" trans>First Name*</label>
+                                        <input type="text" formControlName="first_name" class="form-control user-name"
+                                            name="first_name" placeholder="First Name" trans-placeholder
+                                            aria-label="First name">
+                                        <div *ngIf="profileForm.controls['first_name'].invalid && (profileForm.controls['first_name'].dirty || profileForm.controls['first_name'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['first_name'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> First Name is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label class="form-label" trans>Last Name*</label>
+                                        <input type="text" formControlName="last_name" class="form-control user-name"
+                                            name="last_name" placeholder="Last Name" trans-placeholder
+                                            aria-label="Last name">
+                                        <div *ngIf="profileForm.controls['last_name'].invalid && (profileForm.controls['last_name'].dirty || profileForm.controls['last_name'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['last_name'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Last Name is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label class="form-label" trans>Username*</label>
+                                        <input type="text" (keydown.space)="$event.preventDefault();"
+                                            class="form-control user-name" formControlName="user_name"
+                                            placeholder="Enter username" trans-placeholder aria-label="Username">
+                                        <div *ngIf="profileForm.controls['user_name'].invalid && (profileForm.controls['user_name'].dirty || profileForm.controls['user_name'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['user_name'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> User Name is required!
+                                            </div>
+                                            <div *ngIf="profileForm.controls['user_name'].errors.minlength" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Please type atleast 5
+                                                characters!
+                                            </div>
+                                            <div *ngIf="profileForm.controls['user_name'].errors.maxlength" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Only 25 characters are
+                                                allowed!
+                                            </div>
+                                            <div *ngIf="profileForm.controls['user_name'].errors.pattern" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> No special characters are
+                                                allowed!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label class="form-label" trans>Company</label>
+                                        <input type="text" class="form-control user-name" formControlName="company"
+                                            placeholder="Enter company name" aria-label="Company">
+                                        <div *ngIf="profileForm.controls['company'].invalid && (profileForm.controls['company'].dirty || profileForm.controls['company'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['company'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Company name is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label class="form-label" trans>Dj Name*</label>
+                                        <input type="text" class="form-control user-name" formControlName="djname"
+                                            trans-placeholder placeholder="Enter dj name" aria-label="Dj Name">
+                                        <div *ngIf="profileForm.controls['djname'].invalid && (profileForm.controls['djname'].dirty || profileForm.controls['djname'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['djname'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Dj Name is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label for="exampleInputEmail1" class="form-label" trans>Email*</label>
+                                        <input type="email" class="form-control user-name" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" formControlName="email" trans-placeholder
+                                            placeholder="Enter email">
+                                        <div *ngIf="profileForm.controls['email'].invalid && (profileForm.controls['email'].dirty || profileForm.controls['email'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['email'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Email is required!
+                                            </div>
+                                            <div *ngIf="profileForm.controls['email'].errors?.pattern" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Invalid email!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label for="Phonenumber" class="form-label" trans>Phone*</label>
+                                        <input type="number" min="0" class="form-control user-name" id="Phonenumber"
+                                            formControlName="phone" placeholder="Enter phone number" trans-placeholder>
+                                        <div *ngIf="profileForm.controls['phone'].invalid && (profileForm.controls['phone'].dirty || profileForm.controls['phone'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['phone'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Phone is required!
+                                            </div>
+                                            <div *ngIf="profileForm.controls['phone'].errors.maxlength" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon>
+                                                Maximum length should be 10 digits!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label for="djtype" class="form-label" trans>Type of Dj*</label>
+                                        <select class="form-select form-control user-name" id="djtype"
+                                            aria-label="Default select example" formControlName="djtype">
+                                            <option value="" selected trans>---Select---</option>
+                                            <option *ngFor="let item of djTypes" value="{{item.model.id}}" trans>
+                                                {{item.model.name}}</option>
+                                        </select>
+                                        <div *ngIf="profileForm.controls['djtype'].invalid && (profileForm.controls['djtype'].dirty || profileForm.controls['djtype'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['djtype'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon>Type of Dj is required!
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-4 mb-md-5">
+                                        <div class="row">
+                                            <label for="form-label" trans>Where Do You Regularly Perform?*</label>
+                                            <div class="col-md-4" formArrayName="regular_perform_location"
+                                                *ngFor="let loc of regular_perform_location.controls;let i=index;">
+                                                <input type="text" class="form-control user-name mt-2"
+                                                    [formControlName]="i" placeholder="Enter" trans-placeholder
+                                                    aria-label="Username">
+                                                <div *ngIf="regular_perform_location.controls[i].invalid && (regular_perform_location.controls[i].dirty || regular_perform_location.controls[i].touched)"
+                                                    class="error big-error">
+                                                    <div *ngIf="getValidity(i)" trans>
+                                                        <mat-icon svgIcon="warning"></mat-icon> This field is
+                                                        required!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-4 mb-md-5">
+                                        <label class="form-label" trans>How Many People Do You Perform For
+                                            Weekly*</label>
+                                        <input type="number" min="1" class="form-control user-name"
+                                            formControlName="number_of_people_perform_weekly" placeholder="Enter"
+                                            trans-placeholder aria-label="Username">
+                                        <div *ngIf="profileForm.controls['number_of_people_perform_weekly'].invalid && (profileForm.controls['number_of_people_perform_weekly'].dirty || profileForm.controls['number_of_people_perform_weekly'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['number_of_people_perform_weekly'].errors.required"
+                                                trans>
+                                                <mat-icon svgIcon="warning"></mat-icon>
+                                                This field is required!
+                                            </div>
+                                            <div *ngIf="profileForm.controls['number_of_people_perform_weekly'].errors.max"
+                                                trans>
+                                                <mat-icon svgIcon="warning"></mat-icon>
+                                                Maximum length should be 6!
+                                            </div>
+                                            <div *ngIf="profileForm.controls['number_of_people_perform_weekly'].errors.min"
+                                                trans>
+                                                <mat-icon svgIcon="warning"></mat-icon>
+                                                Minimum length should be 0!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label for="form-label" trans>Password*</label>
+                                        <input type="password" class="form-control user-name mt-2"
+                                            formControlName="password" placeholder="Enter password"
+                                            aria-label="Password*">
+                                        <div *ngIf="profileForm.controls['password'].invalid && (profileForm.controls['password'].dirty || profileForm.controls['password'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['password'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Password is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label for="form-label" trans>Confirm Password*</label>
+                                        <input type="password" class="form-control user-name mt-2"
+                                            formControlName="confirm_password" placeholder="Enter confirm password"
+                                            aria-label="Confirm Password*">
+                                        <div *ngIf="profileForm.controls['confirm_password'].invalid && (profileForm.controls['confirm_password'].dirty || profileForm.controls['confirm_password'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="profileForm.controls['confirm_password'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon>Confirm password is required!
+                                            </div>
+                                        </div>
+                                        <div *ngIf="profileForm?.errors?.notSame" class="error big-error" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon>Confirm password does not match!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label class="form-label" trans>Website</label>
+                                        <input type="text" class="form-control user-name" name="website"
+                                            trans-placeholder placeholder="Enter website name" aria-label="Username">
+
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label class="form-label" trans>Instagram</label>
+                                        <input type="text" class="form-control user-name" trans-placeholder
+                                            name="instagram" placeholder="Enter instagram link" aria-label="Username">
+
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label class="form-label" trans>Facebook</label>
+                                        <input type="text" class="form-control user-name" name="facebook"
+                                            trans-placeholder placeholder="Enter facebook link" aria-label="Username">
+
+                                    </div>
+                                    <div class="col-md-6 mb-4 mb-md-5">
+                                        <label class="form-label" trans>Twitter</label>
+                                        <input type="text" class="form-control user-name" name="twitter"
+                                            placeholder="Enter twitter link" aria-label="Username" trans-placeholder>
+
+                                    </div>
+                                    <div class="profile-details-save">
+                                        <!-- <a class="btn login-button mb-4" href="javascript:void(0)"
+                                                    routerLink="/plans">Save</a> -->
+                                        <button type="submit" [disabled]="!profileForm.valid"
+                                            class="btn btn-success login-button" trans>Register</button>
+                                    </div>
+                                    <p class="text-center sign-up mt-5" trans>Already have an account?<a
+                                            href="javascript:void(0)" routerLink="/login" class="fw-bold" trans> Login</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

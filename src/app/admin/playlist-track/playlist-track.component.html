@@ -1,0 +1,58 @@
+<div class="datatable responsive-table">
+    <datatable-header pluralResourceName="tracks">
+        <ng-container leftContent>
+            <h4><a routerLink="javascript:void(0)" (click)="locationback()">Playlist</a> / Tracks</h4>
+            <!-- <a mat-raised-button color="accent" routerLink="/admin/upload" *ngIf="currentUser.hasPermission('tracks.create')" trans>Upload</a>
+            <a mat-button routerLink="/admin/tracks/new" *ngIf="currentUser.hasPermission('tracks.create')" trans>Create</a> -->
+             <!-- <a mat-raised-button color="accent" routerLink="/admin/tracks/new" *ngIf="currentUser.hasPermission('tracks.create')" trans>Create</a> -->
+        </ng-container>
+        <button rightContent mat-raised-button color="accent" (click)="maybeDeleteSelectedTracks()" *ngIf="currentUser.hasPermission('tracks.delete')" trans>Remove from PlayList</button>
+    </datatable-header>
+    <table class="material-table">
+        <thead>
+        <tr>
+            <th table-header-checkbox></th>
+            <th table-sort-header="name" trans>Track</th>
+            <th trans>Artist</th>
+            <th table-sort-header trans>Duration</th>
+            <th >Downloads</th> 
+           <!--  <th table-sort-header="plays_count" trans>Plays</th> -->
+            <th table-sort-header="updated_at" trans>Added Date</th>
+            <!-- <th></th> -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let track of tracks$ | async">
+            <td [table-body-checkbox]="track.id"></td>
+            <td>
+                <div class="column-with-image">
+                    <!-- <media-image [media]="track" default="album"></media-image> -->
+                    {{track.name}}
+                </div>
+            </td>
+            <td data-label="Artist">
+                <div class="column-with-image" *ngIf="track.artists[0] as artist">
+                    <!-- <media-image [media]="artist" default="album"></media-image> -->
+                    {{artist.name}}
+                </div>
+            </td>
+            <td data-label="Duration">{{formatDuration(track.duration)}}</td>
+            <td>{{track.user_downloads ? track.user_downloads : 0}}</td>
+            <!-- <td data-label="Plays">{{track.plays_count}}</td> -->
+            <td>{{track.added_at.created_at | formattedDate}}</td>
+            <!-- <td class="edit-column">
+                <button mat-icon-button (click)="openCrupdateLyricModal(track)" [matTooltip]="'Add to Playlist' | trans">
+                    <mat-icon svgIcon="closed-caption"></mat-icon>
+                </button>
+                <a mat-icon-button [routerLink]="['/admin/tracks', track.id]"  *ngIf="currentUser.hasPermission('tracks.update')" [matTooltip]="'Edit track' | trans">
+                    <mat-icon svgIcon="edit"></mat-icon>
+                </a>
+            </td> -->
+        </tr>
+        </tbody>
+    </table>
+    <no-results-message svgImage="music.svg" *ngIf="datatable.paginator.noResults$ | async">
+        <span primary-text>No tracks have been created yet</span>
+    </no-results-message>
+    <datatable-footer></datatable-footer>
+</div>

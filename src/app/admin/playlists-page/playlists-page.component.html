@@ -1,0 +1,50 @@
+<div class="datatable responsive-table">
+    <datatable-header pluralResourceName="playlists">
+        <ng-container leftContent>
+            <button type="button" mat-raised-button color="accent" *ngIf="currentUser.hasPermission('playlists.create')" (click)="showCrupdatePlaylistModal()" headerActions trans>Add</button>
+        </ng-container>
+        <button rightContent mat-raised-button color="accent" (click)="confirmPlaylistsDeletion()" *ngIf="currentUser.hasPermission('playlists.delete')" trans>Delete Selected</button>
+    </datatable-header>
+    <table class="material-table">
+        <thead>
+        <tr>
+            <th table-header-checkbox></th>
+            <th table-sort-header="name" trans>Playlist</th>
+            <!-- <th trans>Owner</th> -->
+            <th table-sort-header trans>Public</th>
+            <th table-sort-header trans>Views</th>
+            <th table-sort-header="updated_at" trans>Last Updated</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let playlist of playlists$ | async">
+            <td [table-body-checkbox]="playlist.id"></td>
+            <td>
+                <div class="column-with-image">
+                    <!-- <img [src]="getPlaylistImage(playlist.image)" alt="Playlist image"> -->
+                    <a [routerLink]="urls.playlist(playlist)" target="_blank" class="link">{{playlist.name}}</a>
+                </div>
+            </td>
+           <!--  <td data-label="Owner">
+                <user-column [user]="playlist.editors[0]"></user-column>
+            </td> -->
+            <td data-label="Public">{{playlist.public ? 'Yes' : 'No'}}</td>
+            <td data-label="Views">{{playlist.views}}</td>
+            <td data-label="Last Updated">{{playlist.updated_at | formattedDate}}</td>
+            <td class="edit-column">
+                <button mat-icon-button (click)="showCrupdatePlaylistModal(playlist)" [matTooltip]="'Edit playlist' | trans">
+                    <mat-icon svgIcon="edit"></mat-icon>
+                </button>
+                <button mat-icon-button [routerLink]="'/admin/playlist/'+playlist.id" [matTooltip]="'Track List' | trans">
+                    <mat-icon svgIcon="link"></mat-icon>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <no-results-message svgImage="playlist.svg" *ngIf="datatable.paginator.noResults$ | async">
+        <span primary-text>No playlists have been created yet</span>
+    </no-results-message>
+    <datatable-footer></datatable-footer>
+</div>

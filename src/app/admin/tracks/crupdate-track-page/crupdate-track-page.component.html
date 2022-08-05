@@ -1,0 +1,3 @@
+<div trans="" class="customtitle"*ngIf="!track" >Upload New Track</div>
+<div trans="" class="customtitle" *ngIf="track" >Update Track</div>
+<track-form [track]="track" class="material-panel" (canceled)="toTracksPage()" [autoMatch]="settings.get('player.artist_type') === 'artist'" (saved)="toTracksPage()"></track-form>

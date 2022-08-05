@@ -1,0 +1,148 @@
+<ng-container *ngIf="currentMembership && currentMembership[0] && currentMembership[0].plan">
+    <div class="alert btn-success alert-close-icon" role="alert" trans>
+        Your <b>{{currentMembership[0]?.plan?.name}}</b> ({{currentMembership[0]?.plan?.interval}}) membership is valid
+        till
+        <b>{{currentMembership[0]?.renews_at | date:"MM/dd/yyyy"}}</b>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="row mt-5" trans>
+        <div class="col-md-4">
+            <p trans>Member Since</p>
+            <p class="member-since" trans>{{currentMembership[0]?.created_at | date:"MM/dd/yyyy"}}</p>
+        </div>
+        <div class="col-md-4">
+            <p trans>Account Status</p>
+            <p class="account-status" trans>Active</p>
+        </div>
+        <div class="col-md-4" *ngIf="canCancel()">
+            <p class="text-right cancel-membership" trans (click)="maybeCancelSubscription()" style="cursor: pointer;">Cancel
+                Membership</p>
+        </div>
+    </div>
+</ng-container>
+
+
+<div class="row justify-content-center mt-5 mb-5">
+    <div class="col-lg-12 col-md-12 desktop-view-table">
+
+        <div class="row text-center table-headings">
+            <div class="col-md-4 col-4">
+                <h4 trans>Best value</h4>
+            </div>
+            <div class="col-md-4 col-4">
+                <h4 trans>Most popular</h4>
+            </div>
+            <div class="col-md-4 col-4">
+                <h4 trans>Standard</h4>
+            </div>
+        </div>
+        <div class="custom-border">
+
+            <div class="border-class">
+                <div class="row text-center monthly-plans">
+                    <div class="col-md-4 p-0 py-5" *ngFor="let plan of allPlans; let i = index"
+                        [ngClass]="i % 2 != 0 ? 'bi-annual' : ''">
+                        <h2>{{plan.name}}</h2>
+                        <p>{{plan.interval_count}} {{plan.interval}} access</p>
+                        <ng-container *ngIf="plan?.features.length > 0">
+                            <ng-container *ngFor="let feature of plan?.features; let last = last;">
+                                <p class="p-3 charges-off mb-0">{{feature}}
+                                </p>
+                                <ng-container *ngIf="last && plan?.features.length < maximumFeaturesCount">
+                                    <p *ngFor="let item of [].constructor(maximumFeaturesCount - plan?.features.length)"
+                                        class="p-3 charges-off mb-0 ">-
+                                        <!-- <i class="bi bi-x-lg"></i> -->
+                                    </p>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="plan?.features.length == 0">
+                            <p *ngFor="let item of [].constructor(maximumFeaturesCount)"
+                                class="p-3 charges-off mb-0">-
+                                <!-- <i class="bi bi-x-lg text-danger"></i> -->
+                            </p>
+                        </ng-container>
+                        <div class="border-bottom-0 p-4">
+                            <p><span class="charges">{{plan.currency_symbol}}
+                                {{plan.amount.toFixed(2)}}</span><span class="month" trans>/{{plan.interval}}</span></p>
+                            <ng-container *ngIf="selectPlanButtonText(plan) == 'current';else second">
+                                <div class="mt-5">
+                                    <a href="javascript:;" class="text-success current-plans" trans>
+                                        {{ 'Your Current Plan' | trans }}
+                                    </a>
+                                </div>
+                            </ng-container>
+                            <ng-template #second>
+                                <ng-container *ngIf="selectPlanButtonText(plan) == 'choose';else third">
+                                    <a routerLink="/web/billing/upgrade" class="btn btn-success  mb-2 mt-4 subscribe-button" trans>
+                                        {{ 'Update' | trans }}
+                                    </a>
+                                </ng-container>
+                            </ng-template>
+                            <ng-template #third>{{ 'Get Started' | trans }}</ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- mobile-view-table -->
+<section>
+
+    <div class="container mobile-responsive-table">
+        <div class="mobile-table text-center">
+            <div class="row">
+                <div class="col-md-12 mb-5" *ngFor="let plan of allPlans; let i = index"
+                [ngClass]="i % 2 != 0 ? 'bi-annual' : ''" trans>
+                <h3 *ngIf="i===0" class="mb-4" trans>Best value 1111111</h3>
+                <h3 *ngIf="i===1" class="mb-4 mt-5" trans>Most popular</h3>
+                <h3 *ngIf="i===2" class="mb-4" trans>Standard</h3>
+
+                    <div class="mobile-table-border">
+                        <h2>{{plan.name}}</h2>
+                        <p>{{plan.interval_count}} {{plan.interval}} access</p>
+                        <ng-container *ngIf="plan?.features.length > 0">
+                            <ng-container *ngFor="let feature of plan?.features; let last = last;">
+                                <p class="p-3 charges-off mb-0">{{feature}}
+                                </p>
+                                <ng-container *ngIf="last && plan?.features.length < maximumFeaturesCount">
+                                    <p *ngFor="let item of [].constructor(maximumFeaturesCount - plan?.features.length)"
+                                        class="p-3 charges-off mb-0 ">-
+                                        <!-- <i class="bi bi-x-lg"></i> -->
+                                    </p>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="plan?.features.length == 0">
+                            <p *ngFor="let item of [].constructor(maximumFeaturesCount)"
+                                class="p-3 charges-off mb-0">-
+                                <!-- <i class="bi bi-x-lg text-danger"></i> -->
+                            </p>
+                        </ng-container>
+                        <div class="border-bottom-0 p-4">
+                            <p><span class="charges">{{plan.currency_symbol}}
+                                {{plan.amount.toFixed(2)}}</span><span class="month" trans>/{{plan.interval}}</span></p>
+                            <ng-container *ngIf="selectPlanButtonText(plan) == 'current';else second">
+                                <div class="mt-5">
+                                    <a href="javascript:;" class="text-success current-plans" trans>
+                                        {{ 'Your Current Plan' | trans }}
+                                    </a>
+                                </div>
+                            </ng-container>
+                            <ng-template #second>
+                                <ng-container *ngIf="selectPlanButtonText(plan) == 'choose';else third">
+                                    <a routerLink="/web/billing/upgrade" class="btn btn-success  mb-2 mt-4 subscribe-button" trans>
+                                        {{ 'Update' | trans }}
+                                    </a>
+                                </ng-container>
+                            </ng-template>
+                            <ng-template #third>{{ 'Get Started' | trans }}</ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

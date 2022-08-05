@@ -1,0 +1,98 @@
+<material-navbar menuPosition="admin-navbar" color="primary" [showToggleButton]="true" (toggleButtonClick)="toggleLeftSidebar()"></material-navbar>
+
+<mat-sidenav-container class="admin-page-content">
+    <mat-sidenav [opened]="!leftColumnIsHidden" [mode]="(breakpoints.isMobile$ | async) ? 'over' : 'side'" [fixedInViewport]="true" [fixedTopGap]="70" class="left-column">
+        <div class="left-column-inner custom-menu-admin">
+            <!-- <custom-menu [position]="menu" [vertical]="true"></custom-menu> -->
+
+            <a *ngIf="currentUser.hasRole('admin')" class="nav-item custom-menu-item route-nav-item " routerLink="analytics/google"  routerLinkActive="active">
+                <!-- <mat-icon svgIcon="link"></mat-icon> -->
+                <span class="text" trans>Dashboard</span>
+            </a>
+            <a *ngIf="currentUser.hasRole('admin') || currentUser.hasRole('moderator')" class="nav-item custom-menu-item route-nav-item " routerLink="tracks"  routerLinkActive="active">
+               <!--  <mat-icon svgIcon="link"></mat-icon> -->
+                <span class="text" trans>Library</span>
+            </a>
+            <a *ngIf="currentUser.hasRole('admin')" class="nav-item custom-menu-item route-nav-item " (click)="showSale()" href="javascript:void(0)">
+                <!-- <mat-icon svgIcon="link"></mat-icon> -->
+                <span class="text" trans>Sales</span>
+                <mat-icon svgIcon="{{salemenuicon}}" class="scnd-icon"></mat-icon>
+            </a>
+            <ng-container *ngIf="salemenu">
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="users"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Users</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="subscriptions"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Subscriptions</span>
+                </a>
+            </ng-container>
+            <a *ngIf="currentUser.hasRole('admin')" class="nav-item custom-menu-item route-nav-item" (click)="showSetting()" href="javascript:void(0)">
+                <!-- <mat-icon svgIcon="link"></mat-icon> -->
+                <span class="text" trans>Settings</span>
+                <mat-icon svgIcon="{{settingicon}}" class="scnd-icon"></mat-icon>
+            </a>
+            <ng-container *ngIf="settingmenu">
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="settings/general"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>General</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="settings/billing"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Billing</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="settings/mail"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Mail</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="plans"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Plans</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="promocodes"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Promotional</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="categories"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Categories</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="genres"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Genres</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="subgenres"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Subgenres</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="keys"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Keys</span>
+                </a>
+                 <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="bpms"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>BPM</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="playlists"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Playlists</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="custom-pages"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Pages</span>
+                </a>
+                <a class="nav-item custom-menu-item route-nav-item sub-menu-cus" routerLink="translations"  routerLinkActive="active">
+                    <!-- <mat-icon svgIcon="drag-handle"></mat-icon> -->
+                    <span class="text" trans>Translations</span>
+                </a>
+                
+            </ng-container>
+
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content-inner">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

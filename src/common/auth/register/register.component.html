@@ -1,0 +1,125 @@
+<section>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="login-wraaper">
+                    <form (ngSubmit)="register()" [formGroup]="form" ngNativeValidate>
+                        <div class="row">
+                            <h2 class="login-heading mb-2 mb-md-5" trans>{{auth.isLabel?'Label Sign Up':'Sign Up'}}</h2>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control user-name" placeholder="First Name"
+                                    formControlName="first_name" aria-label="First name" trans-placeholder>
+                                <div *ngIf="form.controls['first_name'].invalid && (form.controls['first_name'].dirty || form.controls['first_name'].touched)"
+                                    class="error big-error">
+
+                                    <div class="align-err" *ngIf="form.controls['first_name'].errors.required" trans>
+                                        <mat-icon svgIcon="warning"></mat-icon> First Name is required!
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control user-name" placeholder="Last Name"
+                                    formControlName="last_name" aria-label="Last name" trans-placeholder>
+                                <div *ngIf="form.controls['last_name'].invalid && (form.controls['last_name'].dirty || form.controls['last_name'].touched)"
+                                    class="error big-error">
+                                    <div class="align-err" *ngIf="form.controls['last_name'].errors.required" trans>
+                                        <mat-icon svgIcon="warning"></mat-icon> Last Name is required!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <input id="email" type="text" class="form-control" name="email"
+                                            formControlName="email" placeholder="Email address" trans-placeholder
+                                            required>
+                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    </div>
+                                    <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)"
+                                        class="error big-error">
+                                        <div class="align-err" *ngIf="form.controls['email'].errors.required" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon> Email is required!
+                                        </div>
+                                        <div class="align-err" *ngIf="form.controls['email'].errors?.pattern" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon> Invalid email!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group" id="show_hide_password">
+                                        <input type="password" name="password" formControlName="password"
+                                            autocomplete="current-password" id="id_password" class="form-control"
+                                            placeholder="Password" trans-placeholder required>
+                                        <span class="input-group-text show_hide_password">
+                                            <a><i class="bi bi-eye-slash" id="togglePassword"></i></a>
+                                        </span>
+                                    </div>
+                                    <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)"
+                                        class="error big-error">
+                                        <div class="align-err" *ngIf="form.controls['password'].errors.required" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon> Password is required!
+                                        </div>
+                                        <div class="align-err" *ngIf="form.controls['password'].errors.minlength" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon> Minimum length should be 6!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="input-group" id="show_hide_cpassword">
+                                        <input type="password" class="form-control " id="pwd"
+                                            formControlName="password_confirmation" placeholder="Confirm password"
+                                            name="pswd" trans-placeholder>
+                                        <span class="input-group-text show_hide_password">
+                                            <a><i class="bi bi-eye-slash" id="togglePassword"></i></a>
+                                        </span>
+                                    </div>
+                                    <div *ngIf="form.controls['password_confirmation'].invalid && (form.controls['password_confirmation'].dirty || form.controls['password_confirmation'].touched)"
+                                        class="error big-error">
+                                        <div class="align-err"
+                                            *ngIf="form.controls['password_confirmation'].errors.required" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon> This field is required.
+                                        </div>
+                                        <div class="align-err"
+                                            *ngIf="form.controls['password_confirmation'].errors.invalid" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon> Password does not match.
+                                        </div>
+                                    </div>
+                                    <div class="form-check my-4">
+                                        <input class="form-check-input" type="checkbox" (change)="check = !check"
+                                            [checked]="check" id="flexCheckChecked" trans-placeholder>
+                                        <label class="form-check-label" for="flexCheckChecked" trans>
+                                            Before clicking sign up you are agree with our
+                                            <a href="javascript:void(0)" routerLink="/privacy-policy" target="_blank"
+                                                class="policy-links" trans>
+                                                policy
+                                            </a>
+
+                                            and
+
+                                            <a href="javascript:void(0)" routerLink="/terms-of-conditions"
+                                                target="_blank" class="policy-links mx-2" trans>
+                                                terms of service.
+                                            </a>
+                                        </label>
+                                    </div>
+
+                                    <button class="btn login-button my-3" [disabled]="(!form.valid)|| !check" trans>SIGN
+                                        UP</button>
+                                    <p class="text-center sign-up mt-5" trans>Already have an account?<a
+                                            href="javascript:void(0)" routerLink="/login" class="fw-bold" trans> Login</a></p>
+                                    <a href="javascript:void(0)" routerLink="/label-register"
+                                        class="text-center mt-3 mb-5 d-block policy-links" trans>Become a label</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

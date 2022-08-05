@@ -1,0 +1,27 @@
+<ul class="unstyled-list" *ngIf="getPlan()" [class.dense]="dense">
+    <!-- <ng-container *ngIf="getPlan().show_permissions">
+        <li *ngFor="let permission of getPlan().permissions">
+            <mat-icon class="check-icon" svgIcon="check" *ngIf="showCheckIcons"></mat-icon>
+            <span>{{permission.display_name || permission.name}}</span>
+        </li>
+    </ng-container> -->
+    <ng-container *ngIf="getPlan().features.length">
+        <ng-container *ngFor="let feature of getPlan().features; let last = last;">
+            <li class="p-3 charges-off mb-0">
+                <mat-icon class="check-icon" svgIcon="check" *ngIf="showCheckIcons"></mat-icon>
+                <span>{{feature}}</span>
+            </li>
+            <ng-container *ngIf="last && plan?.features.length < maximumFeaturesCount">
+                <li *ngFor="let item of [].constructor(maximumFeaturesCount - plan?.features.length)"
+                    class="p-3 charges-off mb-0 ">-
+                    <!-- <i class="bi bi-x-lg text-danger"></i> -->
+                </li>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="getPlan().features.length == 0">
+        <li *ngFor="let item of [].constructor(maximumFeaturesCount)" class="p-3 charges-off mb-0">-
+            <!-- <i class="bi bi-x-lg text-danger"></i> -->
+        </li>
+    </ng-container>
+</ul>

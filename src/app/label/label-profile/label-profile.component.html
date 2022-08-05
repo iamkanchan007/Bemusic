@@ -1,0 +1,410 @@
+<section>
+    <div class="container-fluid">
+        <div class="complete-profile-wrapper">
+            <div class="row">
+                <h1 trans>Account</h1>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="complete-profile-border mb-5">
+                            <div class="col-md-12">
+                                <h3 class="profile-details" trans>Profile details</h3>
+                                <!-- <hr> -->
+                                <form [formGroup]="profileForm" (ngSubmit)="save()">
+                                    <div class="row mt-5">
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>First Name*</label>
+                                            <input type="text" class="form-control user-name"
+                                                formControlName="first_name" placeholder="First Name" trans-placeholder
+                                                aria-label="First name">
+                                            <div *ngIf="profileForm.controls['first_name'].invalid && (profileForm.controls['first_name'].dirty || profileForm.controls['first_name'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['first_name'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> First Name is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>Last Name*</label>
+                                            <input type="text" class="form-control user-name"
+                                                formControlName="last_name" placeholder="Last Name" trans-placeholder
+                                                aria-label="Last name">
+                                            <div *ngIf="profileForm.controls['last_name'].invalid && (profileForm.controls['last_name'].dirty || profileForm.controls['last_name'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['last_name'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Last Name is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>Username*</label>
+                                            <input type="text" (keydown.space)="$event.preventDefault();"
+                                                class="form-control user-name" formControlName="user_name"
+                                                placeholder="Enter username" trans-placeholder aria-label="Username">
+                                            <div *ngIf="profileForm.controls['user_name'].invalid && (profileForm.controls['user_name'].dirty || profileForm.controls['user_name'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['user_name'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> User Name is required!
+                                                </div>
+                                                <div *ngIf="profileForm.controls['user_name'].errors.minlength" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Please type atleast 5
+                                                    characters!
+                                                </div>
+                                                <div *ngIf="profileForm.controls['user_name'].errors.maxlength" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Only 25 characters are
+                                                    allowed!
+                                                </div>
+                                                <div *ngIf="profileForm.controls['user_name'].errors.pattern" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> No special characters are
+                                                    allowed!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>Company</label>
+                                            <input type="text" class="form-control user-name" formControlName="company"
+                                                placeholder="Enter company name" aria-label="Company">
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>Dj Name*</label>
+                                            <input type="text" class="form-control user-name" formControlName="djname"
+                                                trans-placeholder placeholder="Enter dj name" aria-label="Dj Name">
+                                            <div *ngIf="profileForm.controls['djname'].invalid && (profileForm.controls['djname'].dirty || profileForm.controls['djname'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['djname'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Dj Name is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label for="exampleInputEmail1" class="form-label" trans>Email*</label>
+                                            <input type="email" class="form-control user-name" id="exampleInputEmail1"
+                                                aria-describedby="emailHelp" formControlName="email" trans-placeholder
+                                                placeholder="Enter email">
+                                            <div *ngIf="profileForm.controls['email'].invalid && (profileForm.controls['email'].dirty || profileForm.controls['email'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['email'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Email is required!
+                                                </div>
+                                                <div *ngIf="profileForm.controls['email'].errors?.pattern" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Invalid email!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label for="Phonenumber" class="form-label" trans>Phone*</label>
+                                            <input type="number" min="0" class="form-control user-name" id="Phonenumber"
+                                                formControlName="phone" placeholder="Enter phone number"
+                                                trans-placeholder>
+                                            <div *ngIf="profileForm.controls['phone'].invalid && (profileForm.controls['phone'].dirty || profileForm.controls['phone'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['phone'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Phone is required!
+                                                </div>
+                                                <div *ngIf="profileForm.controls['phone'].errors.maxlength" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon>
+                                                    Maximum length should be 10 digits!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label for="djtype" class="form-label" trans>Type of Dj*</label>
+                                            <select class="form-select form-control user-name" id="djtype"
+                                                aria-label="Default select example" formControlName="djtype">
+                                                <option value="" selected trans>---Select---</option>
+                                                <option *ngFor="let item of djTypes" value="{{item.model.id}}" trans>
+                                                    {{item.model.name}}</option>
+                                            </select>
+                                            <div *ngIf="profileForm.controls['djtype'].invalid && (profileForm.controls['djtype'].dirty || profileForm.controls['djtype'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['djtype'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon>Type of Dj is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="input-group mb-4">
+                                                <input type="password" name="password" autocomplete="current-password"
+                                                    required="" id="id_password" class="form-control"
+                                                    formControlName="" placeholder="Password">
+                                                <span class="input-group-text"><i class="bi bi-eye-slash"
+                                                        id="togglePassword"></i></span>
+                                            </div> -->
+                                        <div class="col-md-12 mb-4 mb-md-5">
+                                            <div class="row">
+                                                <label for="form-label" trans>Where Do You Regularly Perform?*</label>
+                                                <div class="col-md-4" formArrayName="regular_perform_location"
+                                                    *ngFor="let loc of regular_perform_location.controls;let i=index;">
+                                                    <input type="text" class="form-control user-name mt-2"
+                                                        [formControlName]="i" placeholder="Enter" trans-placeholder
+                                                        aria-label="Username">
+                                                    <div *ngIf="regular_perform_location.controls[i].invalid && (regular_perform_location.controls[i].dirty || regular_perform_location.controls[i].touched)"
+                                                        class="error big-error">
+                                                        <div *ngIf="getValidity(i)" trans>
+                                                            <mat-icon svgIcon="warning"></mat-icon> This field is
+                                                            required!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4 mb-md-5">
+                                            <label class="form-label" trans>How Many People Do You Perform For
+                                                Weekly*</label>
+                                            <input type="number" min="1" class="form-control user-name"
+                                                formControlName="number_of_people_perform_weekly" placeholder="Enter"
+                                                trans-placeholder aria-label="Username">
+                                            <div *ngIf="profileForm.controls['number_of_people_perform_weekly'].invalid && (profileForm.controls['number_of_people_perform_weekly'].dirty || profileForm.controls['number_of_people_perform_weekly'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['number_of_people_perform_weekly'].errors.required"
+                                                    trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon>
+                                                    This field is required!
+                                                </div>
+                                                <div *ngIf="profileForm.controls['number_of_people_perform_weekly'].errors.maxlength"
+                                                    trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon>
+                                                    Maximum length should be 6!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>Website</label>
+                                            <input type="text" class="form-control user-name" formControlName="website"
+                                                trans-placeholder placeholder="Enter website name"
+                                                aria-label="Username">
+                                            <div *ngIf="profileForm.controls['website'].invalid && (profileForm.controls['website'].dirty || profileForm.controls['website'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['website'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Website is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>Instagram</label>
+                                            <input type="text" class="form-control user-name" trans-placeholder
+                                                formControlName="instagram" placeholder="Enter instagram link"
+                                                aria-label="Username">
+                                            <div *ngIf="profileForm.controls['instagram'].invalid && (profileForm.controls['instagram'].dirty || profileForm.controls['instagram'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['instagram'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Instagram is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>Facebook</label>
+                                            <input type="text" class="form-control user-name" formControlName="facebook"
+                                                trans-placeholder placeholder="Enter facebook link"
+                                                aria-label="Username">
+                                            <div *ngIf="profileForm.controls['facebook'].invalid && (profileForm.controls['facebook'].dirty || profileForm.controls['facebook'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['facebook'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Facebook is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>Twitter</label>
+                                            <input type="text" class="form-control user-name" formControlName="twitter"
+                                                placeholder="Enter twitter link" aria-label="Username"
+                                                trans-placeholder>
+                                            <div *ngIf="profileForm.controls['twitter'].invalid && (profileForm.controls['twitter'].dirty || profileForm.controls['twitter'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="profileForm.controls['twitter'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Twitter is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="profile-details-save">
+                                            <!-- <a class="btn login-button mb-4" href="javascript:void(0)"
+                                                    routerLink="/plans">Save</a> -->
+                                            <button type="submit" class="btn btn-success login-button"
+                                                [disabled]="!profileForm.valid" trans>Save
+                                                Changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="complete-profile-border mb-5">
+                            <div class="col-md-12">
+                                <h3 class="profile-details" trans>Address details</h3>
+                                <!-- <hr> -->
+                                <form [formGroup]="addressForm" (ngSubmit)="saveAddress()">
+                                    <div class="row mt-5">
+                                        <div class="col-md-12 mb-4 mb-md-5">
+                                            <label class="form-label" for="form7Example4" trans>Address*</label>
+                                            <input type="text" id="form7Example4" formControlName="address"
+                                                trans-placeholder placeholder="Enter address"
+                                                class="form-control user-name" />
+                                            <div *ngIf="addressForm.controls['address'].invalid && (addressForm.controls['address'].dirty || addressForm.controls['address'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['address'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Address is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-4 mb-md-5">
+                                            <label class="form-label" trans>Suite / Apt</label>
+                                            <input type="text" class="form-control user-name"
+                                                formControlName="suite_apt" placeholder="Enter suite / apt"
+                                                aria-label="Username">
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label for="Country" class="form-label" trans>Country*</label>
+                                            <select class="form-select form-control user-name" formControlName="country"
+                                                aria-label="Default select example"
+                                                (change)="getStates($event.target.value)">
+                                                <option value=" " selected trans>---Select---</option>
+                                                <option value="{{country.name}}" *ngFor="let country of countries"
+                                                    trans>{{country.name}}</option>
+                                            </select>
+                                            <div *ngIf="addressForm.controls['country'].invalid && (addressForm.controls['country'].dirty || addressForm.controls['country'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['country'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Country is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label for="State" class="form-label" trans>State*</label>
+                                            <select class="form-select form-control user-name" formControlName="state"
+                                                aria-label="Default select example">
+                                                <option value="" selected trans>
+                                                    {{addressForm.get('country').value?'---Select---':'Before select
+                                                    country'}}</option>
+                                                <option value="{{state.name}}" *ngFor="let state of states" trans>
+                                                    {{state.name}}</option>
+                                            </select>
+                                            <div *ngIf="addressForm.controls['state'].invalid && (addressForm.controls['state'].dirty || addressForm.controls['state'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['state'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> State is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="input-group mb-3">
+                                                <input type="password" name="password" autocomplete="current-password"
+                                                    required="" id="id_password" class="form-control"
+                                                    formControlName="" placeholder="Password">
+                                                <span class="input-group-text"><i class="bi bi-eye-slash"
+                                                        id="togglePassword"></i></span>
+                                            </div> -->
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label class="form-label" trans>City*</label>
+                                            <input type="text" class="form-control user-name" formControlName="city"
+                                                placeholder="Enter city" aria-label="city" trans-placeholder>
+                                            <div *ngIf="addressForm.controls['city'].invalid && (addressForm.controls['city'].dirty || addressForm.controls['city'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['city'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> City is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mb-md-5">
+                                            <label for="zipcode" class="form-label" trans>Zip code*</label>
+                                            <input type="number" min="1" class="form-control user-name" id="zipcode"
+                                                formControlName="zipcode" placeholder="Enter zip code"
+                                                trans-placeholder>
+                                            <div *ngIf="addressForm.controls['zipcode'].invalid && (addressForm.controls['zipcode'].dirty || addressForm.controls['zipcode'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['zipcode'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Zip code is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="profile-details-save">
+                                            <!-- <a class="btn login-button mb-3" href="javascript:void(0)"
+                                                    routerLink="/plans">Save</a> -->
+                                            <button type="submit" class="btn btn-success login-button"
+                                                [disabled]="!addressForm.valid" trans>Save
+                                                Changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- <div class="complete-profile-border mb-5">
+                                    <div class="col-md-12">
+                                        <h3 class="profile-details">Social Account</h3>
+                                        <hr>
+                                        <div class="media d-flex nowrap my-4 align-items-center">
+                                            <div class="media-left google-icon"><i class="bi bi-google"></i></div>
+                                            <div class="media-body w-100 mx-3">Google</div>
+                                            <div class="media-right"><a href="#" class="btn btn-outline-success">Add</a></div>
+                                        </div>
+                                        <div class="media d-flex nowrap my-4 align-items-center">
+                                            <div class="media-left facebook-icon"><i class="fab fa-facebook-square"></i></div>
+                                            <div class="media-body w-100 mx-3">https://www.facebook.com/djmixinglab</div>
+                                            <div class="media-right"><a href="#" class="btn btn-outline-success">Update</a>
+                                            </div>
+                                        </div>
+                                        <div class="media d-flex nowrap my-4 align-items-center">
+                                            <div class="media-left twitter-icon"><i class="bi bi-twitter"></i></div>
+                                            <div class="media-body w-100 mx-3">Twitter</div>
+                                            <div class="media-right"><a href="#" class="btn btn-outline-success">Add</a></div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                        <div class="complete-profile-border mb-5">
+                            <form [formGroup]="passwordForm" (ngSubmit)="savePassword()">
+                                <div class="row">
+                                    <h3 class="profile-details mb-5" trans>Update Password</h3>
+                                    <div class="col-md-4 mb-4 mb-md-5">
+                                        <label for="form-label" trans>Current Password*</label>
+                                        <input type="password" class="form-control user-name mt-2"
+                                            formControlName="current_password" placeholder="Enter current password"
+                                            aria-label="Current Password*" trans-placeholder>
+                                        <div *ngIf="passwordForm.controls['current_password'].invalid && (passwordForm.controls['current_password'].dirty || passwordForm.controls['current_password'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="passwordForm.controls['current_password'].errors.required"
+                                                trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> Password is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4 mb-md-5">
+                                        <label for="form-label" trans>New Password*</label>
+                                        <input type="password" class="form-control user-name mt-2"
+                                            formControlName="new_password" placeholder="Enter new password"
+                                            aria-label="New Password*" trans-placeholder>
+                                        <div *ngIf="passwordForm.controls['new_password'].invalid && (passwordForm.controls['new_password'].dirty || passwordForm.controls['new_password'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="passwordForm.controls['new_password'].errors.required" trans>
+                                                <mat-icon svgIcon="warning"></mat-icon> New password is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4 mb-md-5">
+                                        <label for="form-label" trans>Confirm New Password*</label>
+                                        <input type="password" class="form-control user-name mt-2"
+                                            formControlName="confirm_password" placeholder="Enter confirm new password"
+                                            aria-label="Confirm New Password*" trans-placeholder>
+                                        <div *ngIf="passwordForm.controls['confirm_password'].invalid && (passwordForm.controls['confirm_password'].dirty || passwordForm.controls['confirm_password'].touched)"
+                                            class="error big-error">
+                                            <div *ngIf="passwordForm.controls['confirm_password'].errors.required"
+                                                trans>
+                                                <mat-icon svgIcon="warning"></mat-icon>Confirm password is required!
+                                            </div>
+                                        </div>
+                                        <div *ngIf="passwordForm?.errors?.notSame" class="error big-error" trans>
+                                            <mat-icon svgIcon="warning"></mat-icon>Confirm password does not match!
+                                        </div>
+                                    </div>
+                                    <!-- <div class="continue-button my-4 d-flex justify-content-end">
+                                        <a href="#" class="btn login-button mt-0" [disabled]="!passwordForm.valid">Save Changes</a>
+                                    </div> -->
+                                    <div class="profile-details-save">
+                                        <button type="submit" class="btn btn-success login-button"
+                                            [disabled]="!passwordForm.valid" trans>Save Changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>

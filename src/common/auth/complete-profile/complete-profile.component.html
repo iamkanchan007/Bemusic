@@ -1,0 +1,359 @@
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="complete-profile-wrapper">
+                    <div class="row">
+                        <h1 trans>Complete profile</h1>
+                        <p class="mb-5 " trans>View and update your account details, profile and more.</p>
+                        <div class="complete-profile-border mb-5">
+                            <div class="col-md-12">
+                                <h3 class="profile-details" trans>Profile details</h3>
+                                <hr>
+                                <form [formGroup]="form" (ngSubmit)="save()" >
+                                    <div class="row mt-5">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" trans>First Name*</label>
+                                            <input type="text" class="form-control user-name"
+                                                formControlName="first_name" placeholder="First Name"  trans-placeholder
+                                                aria-label="First name">
+                                            <div *ngIf="form.controls['first_name'].invalid && (form.controls['first_name'].dirty || form.controls['first_name'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['first_name'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> First Name is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" trans>Last Name*</label>
+                                            <input type="text" class="form-control user-name"
+                                                formControlName="last_name" placeholder="Last Name"  trans-placeholder
+                                                aria-label="Last name">
+                                            <div *ngIf="form.controls['last_name'].invalid && (form.controls['last_name'].dirty || form.controls['last_name'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['last_name'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Last Name is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+
+                                        
+
+                                        <div class="col-md-6 my-4">
+                                            <label class="form-label" trans>Dj Name*</label>
+                                            <input type="text" class="form-control user-name" formControlName="djname"  trans-placeholder
+                                                placeholder="Enter dj name" aria-label="Dj Name">
+                                            <div *ngIf="form.controls['djname'].invalid && (form.controls['djname'].dirty || form.controls['djname'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['djname'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Dj Name is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-4">
+                                            <label for="exampleInputEmail1" class="form-label" trans>Email*</label>
+                                            <input type="email" class="form-control user-name" id="exampleInputEmail1"
+                                                aria-describedby="emailHelp" formControlName="email"  trans-placeholder
+                                                placeholder="Enter email">
+                                            <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['email'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Email is required!
+                                                </div>
+                                                <div *ngIf="form.controls['email'].errors?.pattern" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Invalid email!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-4">
+                                            <label for="Phonenumber" class="form-label" trans>Phone*</label><br/>
+                                            <input type="text" ng2TelInput [ng2TelInputOptions]="inputTelOptions" class="form-control user-name" id="Phonenumber"
+                                                formControlName="phone" placeholder="Enter phone number" (countryChange)="countryChange($event)" trans-placeholder>
+                                            <div *ngIf="form.controls['phone'].invalid && (form.controls['phone'].dirty || form.controls['phone'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['phone'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Phone is required!
+                                                </div>
+                                                <div *ngIf="form.controls['phone'].errors.maxlength" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon>
+                                                    Maximum length should be 10 digits!
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6 my-4 custom-class-dob">
+                                            <label class="form-label" trans>Date of Birth</label>
+                                            <input matInput [matDatepicker]="dp3" class="form-control" disabled  id="date" formControlName="dob">
+                                            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                                        </div>
+
+
+                                        <div class="col-md-6 my-4">
+                                            <label for="Phonenumber" class="form-label" trans>Type of Dj*</label>
+                                            <select class="form-select form-control user-name"
+                                                aria-label="Default select example" formControlName="djtype">
+                                                <option value="" selected trans>---Select---</option>
+                                                <option  *ngFor="let item of djTypes" value="{{item.model.id}}" trans>{{item.model.name}}</option>
+                                            </select>
+                                            <div *ngIf="form.controls['djtype'].invalid && (form.controls['djtype'].dirty || form.controls['djtype'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['djtype'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon>Type of Dj is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="input-group mb-3">
+                                        <input type="password" name="password" autocomplete="current-password"
+                                            required="" id="id_password" class="form-control"
+                                            formControlName="" placeholder="Password">
+                                        <span class="input-group-text"><i class="bi bi-eye-slash"
+                                                id="togglePassword"></i></span>
+                                    </div> -->
+
+                                        <div class="col-md-12 my-4">
+                                            <div class="row">
+                                                <label for="form-label" trans>Where Do You Regularly Perform?*</label>
+                                                <div  class="col-md-4" formArrayName="regular_perform_location" *ngFor="let loc of regular_perform_location.controls;let i=index;">
+                                                    <input type="text" class="form-control user-name mt-2"
+                                                    [formControlName]="i" placeholder="Enter"  trans-placeholder
+                                                    aria-label="Username">
+                                                    <div *ngIf="regular_perform_location.controls[i].invalid && (regular_perform_location.controls[i].dirty || regular_perform_location.controls[i].touched)"
+                                                    class="error big-error">
+                                                       <div *ngIf="getValidity(i)" trans>
+                                                            <mat-icon svgIcon="warning"></mat-icon> This field is
+                                                            required!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 my-4">
+                                            <label class="form-label" trans>How Many People Do You Perform For Weekly*</label>
+                                            <input type="number" class="form-control user-name"
+                                                formControlName="number_of_people_perform_weekly" placeholder="Enter"  trans-placeholder
+                                                aria-label="Username">
+                                            <div *ngIf="form.controls['number_of_people_perform_weekly'].invalid && (form.controls['number_of_people_perform_weekly'].dirty || form.controls['number_of_people_perform_weekly'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['number_of_people_perform_weekly'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon>
+                                                    This field is required!
+                                                </div>
+                                                <div *ngIf="form.controls['number_of_people_perform_weekly'].errors.max"
+                                                trans>
+                                                <mat-icon svgIcon="warning"></mat-icon>
+                                                Maximum length should be 6!
+                                            </div>
+                                            <div *ngIf="form.controls['number_of_people_perform_weekly'].errors.min"
+                                                trans>
+                                                <mat-icon svgIcon="warning"></mat-icon>
+                                                Minimum length should be 0!
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-4">
+                                            <label class="form-label" trans>Website</label>
+                                            <input type="text" class="form-control user-name" formControlName="website"  trans-placeholder
+                                                placeholder="Enter website name" aria-label="Username">
+                                            <div *ngIf="form.controls['website'].invalid && (form.controls['website'].dirty || form.controls['website'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['website'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Website is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-4">
+                                            <label class="form-label" trans>Instagram</label>
+                                            <input type="text" class="form-control user-name"  trans-placeholder
+                                                formControlName="instagram" placeholder="Enter instagram link"
+                                                aria-label="Username">
+                                            <div *ngIf="form.controls['instagram'].invalid && (form.controls['instagram'].dirty || form.controls['instagram'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['instagram'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Instagram is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-4">
+                                            <label class="form-label" trans>Facebook</label>
+                                            <input type="text" class="form-control user-name" formControlName="facebook"  trans-placeholder
+                                                placeholder="Enter facebook link" aria-label="Username">
+                                            <div *ngIf="form.controls['facebook'].invalid && (form.controls['facebook'].dirty || form.controls['facebook'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['facebook'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Facebook is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-4">
+                                            <label class="form-label" trans>Twitter</label>
+                                            <input type="text" class="form-control user-name" formControlName="twitter"
+                                                placeholder="Enter twitter link" aria-label="Username"  trans-placeholder>
+                                            <div *ngIf="form.controls['twitter'].invalid && (form.controls['twitter'].dirty || form.controls['twitter'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['twitter'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Twitter is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="profile-details-save">
+                                            <!-- <a class="btn login-button mb-3" href="javascript:void(0)"
+                                            routerLink="/plans">Save</a> -->
+                                            <button type="submit" class="btn btn-success login-button"
+                                                [disabled]="!form.valid" trans>Save
+                                                Changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <div class="complete-profile-border mb-5">
+                            <div class="col-md-12">
+                                <h3 class="profile-details" trans>Address details</h3>
+                                <hr>
+                                <form [formGroup]="addressForm" (ngSubmit)="saveAddress()">
+                                    <div class="row mt-5">
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label" for="form7Example4" trans>Address*</label>
+                                            <input type="text" id="form7Example4" formControlName="address"  trans-placeholder
+                                                placeholder="Enter address" class="form-control user-name" />
+                                                <div *ngIf="addressForm.controls['address'].invalid && (addressForm.controls['address'].dirty || addressForm.controls['address'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['address'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Address is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 my-4">
+                                            <label class="form-label" trans>Suite / Apt</label>
+                                            <input type="text" class="form-control user-name" formControlName="suit_apt"  trans-placeholder
+                                                placeholder="Enter suite / apt" aria-label="Username">
+                                        </div>
+
+                                        
+
+                                        <!-- <div class="input-group mb-3">
+                                        <input type="password" name="password" autocomplete="current-password"
+                                            required="" id="id_password" class="form-control"
+                                            formControlName="" placeholder="Password">
+                                        <span class="input-group-text"><i class="bi bi-eye-slash"
+                                                id="togglePassword"></i></span>
+                                    </div> -->
+
+                                        <div class="col-md-6 my-4">
+                                            <label class="form-label" trans>City*</label>
+                                            <input type="text" class="form-control user-name" formControlName="city"
+                                                placeholder="Enter city" aria-label="city"  trans-placeholder>
+                                                <div *ngIf="addressForm.controls['city'].invalid && (addressForm.controls['city'].dirty || addressForm.controls['city'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['city'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> City is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-4">
+                                            <label for="Phonenumber" class="form-label" trans>Zip code*</label>
+                                            <input type="number" class="form-control user-name" id="Phonenumber"
+                                                formControlName="zipcode" placeholder="Enter zip code"  trans-placeholder>
+                                                <div *ngIf="addressForm.controls['zipcode'].invalid && (addressForm.controls['zipcode'].dirty || addressForm.controls['zipcode'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['zipcode'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Zip code is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-md-6 my-4">
+                                            <label for="State" class="form-label" trans>State*</label>
+                                            <select class="form-select form-control user-name" formControlName="state"
+                                                aria-label="Default select example">
+                                                <option value="" selected trans>{{addressForm.get('country').value?'---Select---':'Before select country'}}</option>
+                                                <option value="{{state.name}}" *ngFor="let state of states" trans>{{state.name}}</option>
+                                            </select>
+                                            <div *ngIf="addressForm.controls['state'].invalid && (addressForm.controls['state'].dirty || addressForm.controls['state'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['state'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> State is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-4">
+                                            <label for="Country" class="form-label" trans>Country*</label>
+                                            <select class="form-select form-control user-name" formControlName="country"
+                                                aria-label="Default select example" (change)="getStates($event.target.value)">
+                                                <option value="" selected trans>---Select---</option>
+                                                <option value="{{country.name}}" *ngFor="let country of countries" trans>{{country.name}}</option>
+                                            </select>
+                                            <div *ngIf="addressForm.controls['country'].invalid && (addressForm.controls['country'].dirty || addressForm.controls['country'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="addressForm.controls['country'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Country is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="profile-details-save">
+                                            <!-- <a class="btn login-button mb-3" href="javascript:void(0)"
+                                            routerLink="/plans">Save</a> -->
+                                            <button type="submit" class="btn btn-success login-button" [disabled]="!addressForm.valid" trans>Save
+                                                Changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- <div class="complete-profile-border mb-5">
+                            <div class="col-md-12">
+                                <h3 class="profile-details">Social Account</h3>
+                                <hr>
+                                <div class="media d-flex nowrap my-4 align-items-center">
+                                    <div class="media-left google-icon"><i class="bi bi-google"></i></div>
+                                    <div class="media-body w-100 mx-3">Google</div>
+                                    <div class="media-right"><a href="#" class="btn btn-outline-success">Add</a></div>
+                                </div>
+
+
+                                <div class="media d-flex nowrap my-4 align-items-center">
+                                    <div class="media-left facebook-icon"><i class="fab fa-facebook-square"></i></div>
+                                    <div class="media-body w-100 mx-3">https://www.facebook.com/djmixinglab</div>
+                                    <div class="media-right"><a href="#" class="btn btn-outline-success">Update</a>
+                                    </div>
+                                </div>
+
+
+                                <div class="media d-flex nowrap my-4 align-items-center">
+                                    <div class="media-left twitter-icon"><i class="bi bi-twitter"></i></div>
+                                    <div class="media-body w-100 mx-3">Twitter</div>
+                                    <div class="media-right"><a href="#" class="btn btn-outline-success">Add</a></div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="continue-button mb-5 d-flex justify-content-center">
+                            <a href="javascript:void(0)" [class.disabled]="isdisable" (click)="checkCompleteProfile()" class="btn login-button mt-0" trans>Continue</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

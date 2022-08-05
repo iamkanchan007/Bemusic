@@ -1,0 +1,84 @@
+<section>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-8">
+                <div class="">
+                    <div class="row my-5">
+                        <div class="contact-us-form">
+                            <h2 class="contact-us-heading" trans>Contact Us</h2>
+                            <p class="mb-5" trans>Our support team is dedicated to quickly helping you solve any
+                                problem.</p>
+                            <div class="col-md-12">
+                                <form [formGroup]="form" (ngSubmit)="submitMessage()" class="border-0">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3 mb-md-4">
+                                            <label class="form-label" trans>Name*</label>
+                                            <input type="text" formControlName="full_name" class="form-control user-name"
+                                                placeholder="Enter name" trans-placeholder aria-label="name">
+                                            <div *ngIf="form.controls['full_name'].invalid && (form.controls['full_name'].dirty || form.controls['full_name'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['full_name'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Name is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3 mb-md-4">
+                                            <label class="form-label" trans>Email*</label>
+                                            <input type="email" formControlName="email" class="form-control user-name"
+                                                placeholder="Enter email" trans-placeholder aria-label="Enter email">
+                                            <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['email'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Email is required!
+                                                </div>
+                                                <div *ngIf="form.controls['email'].errors?.email" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Invalid email!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 mb-3 mb-md-4">
+                                            <label class="form-label" trans>Subject</label>
+                                            <input type="text" formControlName="subject" class="form-control user-name"
+                                                placeholder="Enter subject" trans-placeholder aria-label="Subject">
+                                            <div *ngIf="form.controls['subject'].invalid && (form.controls['subject'].dirty || form.controls['subject'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['subject'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Subject is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 mb-3 mb-md-4">
+                                            <label class="form-label" trans>Message</label>
+                                            <textarea class="form-control user-name" formControlName="message" rows="5"
+                                                id="comment" name="text" placeholder="Enter message"
+                                                trans-placeholder></textarea>
+                                            <div *ngIf="form.controls['message'].invalid && (form.controls['message'].dirty || form.controls['message'].touched)"
+                                                class="error big-error">
+                                                <div *ngIf="form.controls['message'].errors.required" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> Message is required!
+                                                </div>
+                                                <div *ngIf="form.controls['message'].errors?.minlength" trans>
+                                                    <mat-icon svgIcon="warning"></mat-icon> The message must be at least 10 characters.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-success" [disabled]="!form.valid  || sendData"
+                                                trans>
+                                                Send</button>
+                                            <!-- <a href="#" class="btn btn-success mb-5" [disabled]="!form.valid" trans>Send</a> -->
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

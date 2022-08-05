@@ -1,0 +1,48 @@
+@import "../scss/variables";
+
+app-root, .app-content {
+    display: block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.mat-pseudo-checkbox::after {
+    color: #fff !important;
+}
+.mat-raised-button.mat-accent , .mat-flat-button.mat-accent{
+    color: #000 !important;
+}
+.matcustom-date-picker .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: transparent;
+}
+
+.matcustom-date-picker .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0;
+}
+
+.matcustom-date-picker {
+    position: relative;
+    display: block;
+}
+.mat-datepicker-toggle {
+    position: absolute;
+    top: 43px;
+    right: 0;
+    z-index: 9999;
+}
+.custom-create-promo .mat-datepicker-toggle {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 9999;
+}
+.player{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  } 
+
+.input-container.custom-is-infinite input {
+    border: 0 !important;
+}

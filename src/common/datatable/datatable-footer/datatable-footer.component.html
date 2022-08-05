@@ -1,0 +1,73 @@
+<!-- <div class="page-size" *ngIf="!hidePerPage">
+    <div class="page-size-label" trans>Items per page</div>
+    <div class="input-container">
+        <select class="page-size-input" [formControl]="perPageControl">
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="15">15</option>
+            <option [ngValue]="20">20</option>
+            <option [ngValue]="50">50</option>
+            <option [ngValue]="100">100</option>
+        </select>
+    </div>
+</div>
+<div class="range-actions">
+    <div class="range-label" *ngIf="from && to && totalRecords">
+        {{from}} - {{to}} {{'of' | trans}} {{totalRecords}}
+    </div>
+    <button type="button" [disabled]="!havePrevious || (datable.paginator.loading$ | async)" class="range-button" (click)="previousPage()" mat-icon-button>
+        <mat-icon svgIcon="chevron-left"></mat-icon>
+    </button>
+    <button type="button" [disabled]="!haveNext || (datable.paginator.loading$ | async)" class="range-button" (click)="nextPage()" mat-icon-button>
+        <mat-icon svgIcon="chevron-right"></mat-icon>
+    </button>
+</div> -->
+
+
+
+
+
+<div class="pagination-section mt-5">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="dataTables_length" id="example_length">
+          <label class="d-flex align-items-center">
+            <p class="mb-0">Show</p>
+            <select name="example_length" [formControl]="perPageControl" aria-controls="example" class="form-select form-select-sm mx-3">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+            <p class="mb-0">entries</p>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination mb-0">
+            <li class="page-item">
+                <button type="button" [disabled]="!havePrevious || (datable.paginator.loading$ | async)" class="range-button" (click)="previousPage()" mat-icon-button>
+                    <span aria-hidden="true" class="pagination-icon"><i class="bi bi-chevron-left d-flex align-items-center justify-content-center h-100"></i></span>
+                </button>
+            </li>
+            <ng-container *ngIf="lastPage > 1">
+              <li class="page-item" *ngFor="let item of [].constructor(lastPage - 1); let i = index">
+                <a *ngIf="i < 4" href="javascript:;" (click)="goToPageAnchor(i + 1)" class="page-link">{{i == 3 ? (i + 1)+'...' : (i+1)}}</a>
+              </li>
+            </ng-container>
+            <li class="page-item">
+              <input type="number" (click)="goToPage($event)" value="{{currentPage}}" min="1" max="{{lastPage}}" id="inputPassword6" class="form-control">
+            </li>
+            <li class="page-item"><a class="page-link" href="javascript:;" (click)="goToPageAnchor(lastPage)">{{lastPage}}</a></li>
+            <li class="page-item">
+                <button type="button" [disabled]="!haveNext || (datable.paginator.loading$ | async)" class="range-button" (click)="nextPage()" mat-icon-button>
+                    <span aria-hidden="true" class="pagination-icon">
+                        <i class="bi bi-chevron-right d-flex align-items-center justify-content-center h-100"></i>
+                    </span>
+                </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>

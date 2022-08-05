@@ -1,0 +1,44 @@
+<ng-template [ngIf]="isRouter()" [ngIfElse]="emptyList">
+    <div class="container-fluid">
+        <div class="player-content" [class.mobile]="state.isMobile">
+            <ng-container>
+                <mat-drawer-container class="page-content">
+                    <mat-drawer mode="over" [opened]="searchPanel.isOpen" (closedStart)="searchPanel.close()"
+                        [autoFocus]="false">
+                        <search-slideout-panel></search-slideout-panel>
+                    </mat-drawer>
+                    <mat-drawer-content>
+                        <div class="page-wrapper" #scrollContainer>
+                            <div class="space-wrapper">
+                                <mobile-search-bar *ngIf="state.isMobile"></mobile-search-bar>
+                                <router-outlet></router-outlet>
+                            </div>
+                        </div>
+                        <!-- <queue-sidebar *ngIf="!state.isMobile" [class.full-height]="shouldHideVideo"></queue-sidebar> -->
+                    </mat-drawer-content>
+                </mat-drawer-container>
+                <nav-sidebar *ngIf="!state.isMobile"></nav-sidebar>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>
+<ng-template #emptyList>
+    <div *ngIf="!isRouter()">
+        <router-outlet></router-outlet>
+    </div>
+</ng-template>
+<player-controls *ngIf="!state.isMobile && player.getCuedTrack()" class="player"></player-controls>
+<mobile-player-controls *ngIf="state.isMobile && player.getCuedTrack()" class="player"></mobile-player-controls>
+<fullscreen-overlay [class.mobile]="state.isMobile" ngClass="strategy-{{player.getPlaybackStrategy()}}"
+    [class.hide-video]="shouldHideVideo" class="d-none">
+    <div class="player-container youtube-player" id="youtube-player"></div>
+    <div class="player-container html5-player">
+        <div class="img-container">
+            <playback-control-button (play)="player.play()" (pause)="player.pause()" [playing]="player.isPlaying()">
+            </playback-control-button>
+        </div>
+    </div>
+    <div class="player-container soundcloud-player"></div>
+</fullscreen-overlay>
+
+<loading-indicator [isVisible]="state.loading" class="overlay"></loading-indicator>

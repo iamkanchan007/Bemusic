@@ -1,0 +1,288 @@
+<loading-indicator [isVisible]="loadingdata" class="overlay"></loading-indicator>
+<form (ngSubmit)="submit()" class="many-inputs custrackform" [formGroup]="form" *ngIf="errors$ | async as errors">
+    <div class="inline-form" *ngIf="albumForm" [formGroup]="form">
+        <ng-content></ng-content>
+        <div class="input-container">
+            <label [for]="'track-form-' + uniqueId + '-name'" class="hidden" trans>Title</label>
+            <input type="text" [id]="'track-form-' + uniqueId + '-name'" formControlName="name" required>
+        </div>
+        <div class="actions">
+            <button type="button" [class.active]="expanded" mat-icon-button (click)="toggleExpandedState()">
+                <mat-icon svgIcon="edit"></mat-icon>
+            </button>
+            <button type="button" (click)="maybeCancel()" mat-icon-button>
+                <mat-icon svgIcon="delete"></mat-icon>
+            </button>
+        </div>
+    </div>
+    <div [@bodyExpansion]="getExpandedState()" class="full-form">
+        <div class="" [class.inside-album]="albumForm">
+            <div class="error-group many-inputs">
+                <div class="inline-inputs-container">
+                    <div class="input-container">
+                        <label for="user" trans>Label</label>
+                        <input type="text" id="user" placeholder="Search for user..." [formControl]="userAutocomplete" [matAutocomplete]="auto" required>
+                        <!-- <div class="error" *ngIf="errors.user_id">{{errors.user_id}}</div> -->
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let user of filteredUsers | async" [value]="user">{{ user.email }}</mat-option>
+                        </mat-autocomplete>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="error-group many-inputs">
+                <div class="inline-inputs-container">
+                    <div class="input-container">
+                        <div class="input-container" *ngIf="!albumForm">
+                            <label [for]="'track-form-' + uniqueId + '-name'" trans>Title</label>
+                            <input type="text" [id]="'track-form-' + uniqueId + '-name'" formControlName="name" required>
+                            <div class="error" *ngIf="showError('name')" trans>This is a requird field</div>
+                        </div>
+                    </div>
+                    <div class="input-container" style="padding-top: 15px;">
+                        <track-artist-control [error]="errors.artists" [id]="'track-form-' + uniqueId + '-artists'" formControlName="artists" *ngIf="settings.get('player.artist_type') === 'artist' || insideAdmin()"></track-artist-control>
+                        <div class="error" *ngIf="showError('artists')" trans>This is a requird field</div>
+                    </div>
+                </div>
+            </div>
+            <div class="error-group many-inputs">
+                <div class="inline-inputs-container">
+                    <div class="input-container">
+                        <div class="input-container" *ngIf="!albumForm">
+                            <label [for]="'track-form-' + uniqueId + '-bpm'" trans>BPM</label>
+                           <!--  <input type="text" [id]="'track-form-' + uniqueId + '-bpm'" formControlName="bpm" required> -->
+                            <select [id]="'track-form-' + uniqueId + '-bpm'" formControlName="bpm">
+                                <option value="">Select Bpm</option>
+                                <option *ngFor="let gen of bpmList" value="{{gen}}">{{gen}}</option>
+                            </select>
+                            <div class="error" *ngIf="showError('bpm')" trans>This is a requird field</div>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <div class="input-container" *ngIf="!albumForm">
+                            <label [for]="'track-form-' + uniqueId + '-category'" trans>Category</label>
+                           <!--  <input type="text" [id]="'track-form-' + uniqueId + '-category'" formControlName="category" required> -->
+                            <select [id]="'track-form-' + uniqueId + '-category'" formControlName="category" (change)="getcatgen($event.target.value)">
+                                <option value="">Select Category</option>
+                                <option *ngFor="let cates of allCategories" value="{{cates.id}}">{{cates.name}}</option>
+                            </select>
+                            <div class="error" *ngIf="showError('category')" trans>This is a requird field</div>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <label [for]="'track-form-' + uniqueId + '-track-genres'" trans>Genres</label>
+                        <!-- <chip-input [ngClass]="{'disableselect': !form.get('category').value}" placeholder="+Add genre" [id]="'track-form-' + uniqueId + '-track-genres'"[suggestFn]="suggestGenreFnWc" formControlName="genres"></chip-input> -->
+                        <select [id]="'track-form-' + uniqueId + '-genres'" formControlName="genres">
+                            <option value="">Select Genres</option>
+                            <option *ngFor="let gen of genereList" value="{{gen}}">{{gen}}</option>
+                        </select>
+                        <!-- <mat-form-field appearance="fill">
+                            <mat-select  formControlName="genres" multiple>
+                                <mat-option *ngFor="let gen of genereList" [value]="gen">{{gen}}</mat-option>
+                            </mat-select>
+                        </mat-form-field> -->
+                        <div class="error" *ngIf="showError('genres')" trans>This is a requird field</div>
+                    </div>
+                </div>
+            </div>
+            <div class="error-group many-inputs">
+                <div class="inline-inputs-container">
+                    <div class="input-container">
+                        <label [for]="'track-form-' + uniqueId + '-track-subgenres'" trans>Sub Genres</label>
+                        <!-- <chip-input placeholder="+Add genre" [id]="'track-form-' + uniqueId + '-track-subgenres'"[suggestFn]="suggestSubgenreFn" formControlName="subgenres"></chip-input> -->
+                        <select [id]="'track-form-' + uniqueId + '-subgenres'" formControlName="subgenres">
+                            <option value="">Select Subgenres</option>
+                            <option *ngFor="let gen of subgenereList" value="{{gen}}">{{gen}}</option>
+                        </select>
+                        <!-- <mat-form-field appearance="fill">
+                            <mat-select  formControlName="subgenres" multiple>
+                                <mat-option *ngFor="let gen of subgenereList" [value]="gen">{{gen}}</mat-option>
+                            </mat-select>
+                        </mat-form-field> -->
+                        <div class="error" *ngIf="showError('subgenres')" trans>This is a requird field</div>
+                    </div>
+                    <div class="input-container">
+                        <div class="input-container" *ngIf="!albumForm">
+                            <label [for]="'track-form-' + uniqueId + '-key'" trans>Key </label>
+                            <!-- <input type="text"  required> -->
+                            <select [id]="'track-form-' + uniqueId + '-key'" formControlName="key">
+                                <option value="">Select Key</option>
+                                <option *ngFor="let gen of keyList" value="{{gen}}">{{gen}}</option>
+                            </select>
+                            <div class="error" *ngIf="showError('key')" trans>This is a requird field</div>
+                        </div>
+                    </div>
+                    <div class="input-container date-picker-input-container matcustom-date-picker">
+
+                            
+                        <div class="input-container" *ngIf="!albumForm">
+                            <label [for]="'track-form-' + uniqueId + '-date'" trans>Date</label>
+                           <!--  <input type="date" placeholder="YYYY-MM-DD" [min]="mindate()" [id]="'track-form-' + uniqueId + '-date'" formControlName="date" required> -->
+
+                            <!-- <mat-form-field appearance="fill"> -->
+                                <input matInput [matDatepicker]="dp3" disabled  id="date" formControlName="date"  [min]="mindate()">
+                                <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                           <!--  </mat-form-field> -->
+
+                            <div class="error" *ngIf="showError('date')" trans>This is a requird field</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="error-group many-inputs">
+                <div class="inline-inputs-container">
+                        <mat-slide-toggle [checked]="form.get('default').value" (change)="changeDefault($event.checked ? 'on' : 'off', null)"></mat-slide-toggle>
+                    <div class="input-container">
+                        <!-- <input type="checkbox" [id]="'track-form-' + uniqueId + '-default'" formControlName="default" required (change)="changeDefault($event.target.checked ? 'on' : 'off')" class="defaultcheckbox"> -->
+                        <button mat-flat-button color="accent" type="button" class="left-column-action-button defaultcheckboxbutton" (click)="openUploadMusicModal('def')">
+                            <span *ngIf="this.track" trans>Replace File</span>
+                            <span *ngIf="!this.track" trans>Upload</span>
+                        </button>
+                        <div class="error admin-upload-button-error" *ngIf="showError('url')" trans>This is a requird field</div>
+                    </div>
+                    <div class="input-container">
+                        <div class="input-container" *ngIf="getUrlVal('url')">
+                            <label [for]="'track-form-' + uniqueId + '-name'" trans>Url </label>
+                            <input type="text" value="{{ getUrlVal('url') }}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="error-group many-inputs">
+                <div class="inline-inputs-container addversion-section">
+                    <a href="javascript:void(0)" (click)="versioncount()" class="addversion" trans>Add version</a>
+                </div>
+            </div>
+
+
+
+
+            <div cdkDropList class="example-list" (cdkDropListDropped)="reorderVersionlist($event)" >
+                <div *ngFor="let i of varsionCount;" class="version-section"  cdkDrag >
+                    <mat-icon svgIcon="menu" cdkDragHandle></mat-icon>
+                    <div class="error-group many-inputs">
+                        <div class="inline-inputs-container remove-section">
+                            <a href="javascript:void(0)" (click)="removeVersion(i)" class="removeversion" trans>Remove</a>
+                        </div>
+                            <input type="hidden" [id]="'versionposition'+i" value="{{ i }}" formControlName="{{getformname(i, 'position')}}" required>
+                        <div class="inline-inputs-container">
+                            <div class="input-container">
+                                <div class="input-container" *ngIf="!albumForm">
+                                    <label [for]="'track-form-' + uniqueId + '-title'" trans>Title</label>
+                                    <input type="text" [id]="'versiontitle'+i" formControlName="{{getformname(i, 'title')}}" required>
+                                    <div class="error" *ngIf="showError(getformname(i, 'title'))" trans>This is a requird field</div>
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <div class="input-container" *ngIf="!albumForm">
+                                    <label [for]="'track-form-' + uniqueId + '-name'" trans>Category</label>
+                                    <!-- <input type="text" [id]="'track-form-' + uniqueId + '-name'" formControlName="{{getformname(i, 'category')}}" required> -->
+                                    <select [id]="'track-form-' + uniqueId + '-category'" formControlName="{{getformname(i, 'category')}}" (change)="getvercatgen($event.target.value, i)">
+                                        <option value="" trans>Select Category</option>
+                                        <option *ngFor="let cates of allCategories" value="{{cates.id}}">{{cates.name}}</option>
+                                    </select>
+                                    <div class="error" *ngIf="showError(getformname(i, 'category'))" trans>This is a requird field</div>
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <label [for]="'track-form-' + uniqueId + '-track-genres'" trans>Genres</label>
+                                <!-- <chip-input placeholder="+Add genre" [id]="'track-form-' + uniqueId + '-track-genres'"[suggestFn]="suggestGenreFn" formControlName="{{getformname(i, 'genres')}}"></chip-input> -->
+                                <select [id]="'track-form-' + uniqueId + '-genres'" formControlName="{{getformname(i, 'genres')}}">
+                                    <option value="" trans>Select Genres</option>
+                                    <!-- <option *ngFor="let gen of genereListByVer(i)" value="{{gen}}">{{gen}}</option> -->
+                                    <option *ngFor="let gen of genereList" value="{{gen}}">{{gen}}</option>
+                                </select>
+                                <!-- <mat-form-field appearance="fill">
+                                    <mat-select  formControlName="{{getformname(i, 'genres')}}" multiple>
+                                        <mat-option *ngFor="let gen of genereListByVer(i)" [value]="gen">{{gen}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field> -->
+                                <div class="error" *ngIf="showError(getformname(i, 'genres'))" trans>This is a requird field</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="error-group many-inputs">
+                        <div class="inline-inputs-container">
+                            <div class="input-container">
+                                <label [for]="'track-form-' + uniqueId + '-track-genres'" trans>Sub Genres</label>
+                                <!-- <chip-input placeholder="+Add genre" [id]="'track-form-' + uniqueId + '-track-genres'"[suggestFn]="suggestSubgenreFn" formControlName="{{getformname(i, 'subgenres')}}"></chip-input> -->
+                                <select [id]="'track-form-' + uniqueId + '-subgenres'" formControlName="{{getformname(i, 'subgenres')}}">
+                                    <option value="" trans>Select Subgenres</option>
+                                    <option *ngFor="let gen of subgenereList" value="{{gen}}">{{gen}}</option>
+                                </select>
+                                <!-- <mat-form-field appearance="fill">
+                                    <mat-select  formControlName="{{getformname(i, 'subgenres')}}" multiple>
+                                        <mat-option *ngFor="let gen of subgenereList" [value]="gen">{{gen}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field> -->
+                                <div class="error" *ngIf="showError(getformname(i, 'subgenres'))" trans>This is a requird field</div>
+                            </div>
+                            <div class="input-container">
+                                <div class="input-container" *ngIf="!albumForm">
+                                    <label [for]="'track-form-' + uniqueId + '-name'" trans>Key </label>
+                                    <!-- <input type="text" [id]="'track-form-' + uniqueId + '-name'" formControlName="{{getformname(i, 'key')}}" required> -->
+                                    <select [id]="'track-form-' + uniqueId + '-key'" formControlName="{{getformname(i, 'key')}}">
+                                        <option value="" trans>Select Key</option>
+                                        <option *ngFor="let gen of keyList" value="{{gen}}">{{gen}}</option>
+                                    </select>
+                                    <div class="error" *ngIf="showError(getformname(i, 'key'))" trans>This is a requird field</div>
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <div class="input-container" *ngIf="!albumForm">
+                                    <label [for]="'track-form-' + uniqueId + '-name'" trans>BPM</label>
+                                    <!-- <input type="text" [id]="'track-form-' + uniqueId + '-name'" formControlName="{{getformname(i, 'bpm')}}" required> -->
+                                    <select [id]="'track-form-' + uniqueId + '-bpm'" formControlName="{{getformname(i, 'bpm')}}">
+                                        <option value="" trans>Select Bpm</option>
+                                        <option *ngFor="let gen of bpmList" value="{{gen}}">{{gen}}</option>
+                                    </select>
+                                    <div class="error" *ngIf="showError(getformname(i, 'bpm'))" trans>This is a requird field</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="error-group many-inputs">
+                        <div class="inline-inputs-container">
+                                <mat-slide-toggle [checked]="form.get(getformname(i, 'default')).value" (change)="changeDefault($event.checked ? 'on' : 'off', i)"></mat-slide-toggle>
+                            <div class="input-container">
+                                <!-- <input class="defaultcheckbox" type="checkbox" [id]="'track-form-' + uniqueId + '-name'" formControlName="{{getformname(i, 'default')}}" required (change)="changeDefault($event.target.checked ? 'on' : 'off', i)" title="Default"> -->
+                        
+                                <button mat-flat-button color="accent" type="button" class="defaultcheckboxbutton left-column-action-button" (click)="openUploadMusicModal(i)">
+                                    <span *ngIf="getUrlVal(getformname(i, 'url'))" trans>Replace File</span>
+                                    <span *ngIf="!getUrlVal(getformname(i, 'url'))" trans>Upload Track</span>
+                                </button>
+                                <div class="error" *ngIf="showError(getformname(i, 'url'))" trans>This is a requird field</div>
+                            </div>
+                            <div class="input-container">
+                                <div class="input-container" *ngIf="getUrlVal(getformname(i, 'url'))">
+                                    <label [for]="'track-form-' + uniqueId + '-name'" trans>Url </label>
+                                    <input type="text" value="{{getUrlVal(getformname(i, 'url'))}}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="many-inputs fields-container">
+                <div class="input-container" style="display: none;">
+                    <label [for]="'track-form-' + uniqueId + '-duration'" trans>Duration (ms)</label>
+                    <input type="number" [id]="'track-form-' + uniqueId + '-duration'" formControlName="duration" min="1" required>
+                    <div class="error" *ngIf="errors.duration">{{errors.duration}}</div>
+                    <div class="error" *ngIf="maxerror" trans>Duration Must ne less then 5000000000000000000</div>
+                </div>
+
+                <button type="submit" mat-raised-button *ngIf="!albumForm" color="accent" [disabled]="(loading$ | async)" trans>Save</button>
+                <button type="button" mat-button (click)="maybeCancel()" *ngIf="!albumForm && !track" trans>Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>

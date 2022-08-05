@@ -1,0 +1,71 @@
+<mat-progress-bar mode="indeterminate" color="accent" *ngIf="loading$ | async"></mat-progress-bar>
+<!-- <analytics-header [data]="headerData" [startdata] = "0" [enddata] = "2" *ngIf="router.url.includes('/admin/tracks')"></analytics-header> -->
+<analytics-header [data]="headerData" [startdata] = "3" [enddata] = "5" *ngIf="router.url === '/admin/analytics/google'"></analytics-header>
+
+<div class="content" >
+    <div class="chart-row">
+        <div class="chart-wrapper" *ngIf="router.url === '/admin/analytics/google'">
+            <chart [chartConfig]="charts?.monthlyPageViews" [height]="chartHeight">
+                <div class="chart-header">
+                    <div class="title" trans>User Growth</div>
+                    <!-- <div class="subtitle" trans>By page views</div> -->
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item" trans>Inactive subscriber</div>
+                    <div class="legend-item" trans>Active subscriber</div>
+                </div>
+            </chart>
+        </div>
+        <div class="chart-wrapper" style="display:none;">
+            <chart [chartConfig]="charts?.weeklyPageViews" [height]="chartHeight">
+                <div class="chart-header">
+                    <div class="title" trans>This Week vs Last Week</div>
+                    <div class="subtitle" trans>By page views</div>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item" trans>This week</div>
+                    <div class="legend-item" trans>Last week</div>
+                </div>
+            </chart>
+        </div>
+
+        <div class="chart-wrapper pie-wrapper custom-piechart" *ngIf="router.url.includes('/admin/users')">
+            <chart [chartConfig]="charts?.browsers" [height]="380">
+                <div class="chart-header">
+                    <div class="title" trans>Dj Data </div>
+                    <div class="subtitle" trans style="display:none;">By sessions</div>
+                </div>
+            </chart>
+            <ul class="custom-piechart-ul">
+                <li *ngFor="let browser of charts?.browsers?.labels; let i = index">
+                    <span class="custom-color-circle" [ngStyle]="{'background-color': charts?.browsers?.color[i]}"></span>
+                    {{ browser }}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="chart-row" style="display:none;">
+        <div class="chart-wrapper">
+            <chart [chartConfig]="charts?.monthlyPageViews" [height]="chartHeight">
+                <div class="chart-header">
+                    <div class="title" trans>This Month vs Last Month</div>
+                    <div class="subtitle" trans>By page views</div>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item" trans>This month</div>
+                    <div class="legend-item" trans>Last month</div>
+                </div>
+            </chart>
+        </div>
+
+        <div class="chart-wrapper pie-wrapper">
+            <chart [chartConfig]="charts?.countries" [height]="380">
+                <div class="chart-header">
+                    <div class="title" trans>Top Countries</div>
+                    <div class="subtitle" trans>By sessions</div>
+                </div>
+            </chart>
+        </div>
+    </div>
+</div>

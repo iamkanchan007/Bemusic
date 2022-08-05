@@ -1,0 +1,94 @@
+<section *ngIf="playlist">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <h4 *ngIf="playlist && playlist['image']" class="playlist-details-heading mt-5 mb-3">{{playlist['name']}}</h4>
+      <!-- <media-image *ngIf="playlist.image!=null" class="header-image" [media]="playlist"></media-image> -->
+      <!-- <img *ngIf="playlist && playlist['image']" src="{{apiUrl + playlist['image']}}" height="200" width="200"> -->
+    </div>
+  </div>
+</section>
+
+
+<div class="">
+  <!-- <datatable-header pluralResourceName="title" [showSelectedActions]="false">
+  </datatable-header> -->
+  <table class="material-table">
+    <thead>
+      <tr class="customHeader">
+        <!-- <th table-header-checkbox></th> -->
+        <th table-sort-header="name" trans>Title</th>
+        <th table-sort-header="artists.name" trans class="responsive-table-data">Artist</th>
+        <th table-sort-header="genres.name" trans class="responsive-table-data">Genre</th>
+        <th table-sort-header="bpm" trans class="responsive-table-data">BPM</th>
+        <th table-sort-header="key" trans class="responsive-table-data">Key</th>
+        <th table-sort-header="created_at" trans>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let gaana of gaane$ | async; let _index = index">
+        <tr>
+          <td><a href="javascript:void(0)" class="d-flex align-items-center text-truncate">
+              <playback-control-button [track]="gaana" (play)="playTrack(gaana)" (pause)="pausePlayer()">
+              </playback-control-button> <span class="pl-2">{{gaana?.name}}</span>
+            </a></td>
+          <td data-label="First Name">{{gaana?.artists[0]?.name || '-'}}</td>
+          <td data-label="Last Name">{{gaana?.genres[0]?.name || '-'}}</td>
+          <td data-label="Last Name">{{gaana?.bpm || '-'}}</td>
+          <td data-label="Last Name">{{gaana?.t_key || '-'}}</td>
+          <td data-label="Assigned At">{{gaana?.date | date:"MM/dd/yyyy"}}</td>
+          <td><a data-bs-toggle="collapse" href="#collapseDownload{{_index}}"><i
+                class="bi bi-three-dots collapse-icon"></i></a>
+          </td>
+        </tr>
+        <tr class="--custom-height-unset">
+          <td colspan="7" class="p-0">
+            <div class="collapse" id="collapseDownload{{_index}}">
+              <table class="table modal-details">
+                <tr class="text-white">
+                  <td trans>{{gaana?.name}}</td>
+                  <td>
+                    <i [ngClass]="isDownloaded(1, gaana.user_downloads)"
+                      class="bi bi-circle-fill song-download-circle"></i>
+                    <i [ngClass]="isDownloaded(2, gaana.user_downloads)"
+                      class="bi bi-circle-fill song-download-circle"></i>
+                    <i [ngClass]="isDownloaded(3, gaana.user_downloads)"
+                      class="bi bi-circle-fill song-download-circle"></i>
+                  </td>
+                  <td>
+                    <a (click)="downloadTrack(gaana?.id, _index)" href="javascript:void(0)"><i
+                        class="bi bi-download song-download-icon"></i></a>
+                  </td>
+                </tr>
+                <ng-container *ngIf="gaana?.track_versions.length > 0">
+                  <tr *ngFor="let version of gaana?.track_versions; let verIndex = index;" class="text-white">
+                    <td trans>{{version?.name}}</td>
+                    <td>
+                      <i [ngClass]="isVerDownloaded(1, version?.download_count)"
+                        class="bi bi-circle-fill song-download-circle"></i>
+                      <i [ngClass]="isVerDownloaded(2, version?.download_count)"
+                        class="bi bi-circle-fill song-download-circle"></i>
+                      <i [ngClass]="isVerDownloaded(3, version?.download_count)"
+                        class="bi bi-circle-fill song-download-circle"></i>
+                    </td>
+                    <td>
+                      <a (click)="downloadTrackVersion(gaana?.id, version?.id,_index, verIndex)"
+                        href="javascript:void(0)"><i class="bi bi-download song-download-icon"></i></a>
+                    </td>
+                  </tr>
+                </ng-container>
+                <!-- <tr class="border-top-0 ">
+                <td> Do It To It - Kwest vs Acraze Edit (Dirty)</td>
+                <td><i class="bi bi-circle song-download-circle"></i> <i
+                    class="bi bi-circle song-download-circle"></i> <i class="bi bi-circle song-download-circle"></i>
+                </td>
+                <td><a href="javascript:void(0)"><i class="bi bi-download song-download-icon"></i></a></td>
+              </tr> -->
+              </table>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <datatable-footer></datatable-footer>
+</div>

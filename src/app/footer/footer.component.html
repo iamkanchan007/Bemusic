@@ -1,0 +1,58 @@
+<section *ngIf="!isAdmin">
+    <div class="footer-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="javascript:void(0)" routerLink="/"> <img src="assets/img/footer-logo.svg"></a>
+                </div>
+
+                <div class="col-md-3 footer-links">
+                    <div class="company-section">
+                        <h5 class="text-white mb-4" trans>{{footerLines?.company}}</h5>
+                        <ul class="">
+                            <li><a href="javascript:void(0)" routerLink="/web/about" trans>{{footerLines?.about}}</a></li>
+                            <li><a href="javascript:void(0)" routerLink="/web/faqs" trans>{{footerLines?.faq}}</a></li>
+                            <li><a href="javascript:void(0)" routerLink="/web/contact" trans>{{footerLines?.contact}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 footer-links">
+                    <div class="policy-section">
+                        <h5 class="text-white mb-4" trans>{{footerLines?.policy}}</h5>
+                        <ul class="">
+                            <li><a href="javascript:void(0)" routerLink="/web/privacy-policy" trans>{{footerLines?.privacy}}</a></li>
+                            <li><a href="javascript:void(0)" routerLink="/web/terms-of-conditions" trans>{{footerLines?.terms}}</a></li>
+                            <li><a href="javascript:void(0)" routerLink="/web/refund-policy" trans>{{footerLines?.refund}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-2">
+                    <div class="languages-section">
+                        <h5 class="text-light">Languages</h5>
+                        <ul class="">
+                            <li><a href="#">English</a></li>
+                            <li><a href="#">Spanish</a></li>
+                        </ul>
+                    </div>
+                </div> -->
+
+                <div class="col-md-3">
+                    <div class="dj-mixing-section">
+                        <h5 class="text-white mb-4" trans>{{footerLines?.follow}}</h5>
+                        <div class="social-icons">
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-twitter"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-youtube"></i></a>
+                        </div>
+                        <!-- <p class="mt-4 become-a-label">Become a label</p> -->
+                    </div>
+                </div>
+            </div>
+            <hr class="horizontal-line mt-5">
+            <p class="text-center copy-right mb-0" trans>{{footerLines?.copyrights}}</p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,6 @@
+<span class="hover-underline artist-link" *ngFor="let artist of artists$ | async; last as last">
+    <span>{{artist.name}}<ng-container *ngIf="!last">, </ng-container></span>
+</span>
+<!-- <a class="hover-underline artist-link" [routerLink]="artist.route" *ngFor="let artist of artists$ | async; last as last">
+    <span>{{artist.name}}<ng-container *ngIf="!last">, </ng-container></span>
+</a> -->

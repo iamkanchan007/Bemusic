@@ -1,0 +1,15 @@
+a.disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.custom-class-dob {
+    position: relative;
+}
+
+.custom-class-dob .mat-datepicker-toggle {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    z-index: 9999;
+}

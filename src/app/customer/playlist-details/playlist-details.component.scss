@@ -1,0 +1,9 @@
+tr playback-control-button, tr.playing playback-control-button {
+    display: flex;
+    background-color: var(--be-foreground-base);
+    color: var(--be-raised-button);
+    margin: 0;
+}
+.pl-2 {
+    padding-left: 14px;
+}

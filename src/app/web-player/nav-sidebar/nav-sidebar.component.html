@@ -1,0 +1,147 @@
+<!-- <input id="main-search" placeholder="Search..." [formControl]="searchPanel.searchQuery" autocomplete="off" trans-placeholder> -->
+<!-- <div class="content">
+    <a class="logo-container" routerLink="/">
+        <img [src]="settings.get('branding.logo_dark')" alt="Site logo">
+    </a>
+
+    <form class="search-bar-container" (ngSubmit)="searchPanel.goToSearchPage()">
+        <label for="main-search" class="hidden" trans>Main site search</label>
+        <input id="main-search" placeholder="Search..." [formControl]="searchPanel.searchQuery" autocomplete="off" trans-placeholder>
+
+        <mat-icon svgIcon="search" class="search-bar-icon" [class.hidden]="searchPanel.searching || searchPanel.searchQuery.value" (click)="searchPanel.goToSearchPage()"></mat-icon>
+
+        <button type="button" class="no-style search-bar-icon" (click)="searchPanel.close()">
+            <mat-icon svgIcon="close" [class.hidden]="searchPanel.searching || ! searchPanel.searchQuery.value"></mat-icon>
+        </button>
+
+        <loading-indicator [isVisible]="searchPanel.searching" class="small"></loading-indicator>
+    </form>
+
+    <custom-menu position="sidebar-primary" class="sidebar-nav"></custom-menu>
+
+    <a mat-flat-button class="upload-button" color="accent" routerLink="/upload" *ngIf="currentUser.hasPermission('tracks.create') && settings.get('player.show_upload_btn')" trans>Upload</a>
+
+    <div class="separator"></div>
+
+    <div class="auth-container">
+        <div *ngIf="currentUser.isLoggedIn()" class="current-user">
+            <a [routerLink]="urls.user(currentUser.getModel())" class="img-container">
+                <img [src]="currentUser.get('avatar')" alt="user avatar">
+            </a>
+            <a class="name hover-underline" [routerLink]="urls.user(currentUser.getModel())">{{currentUser.get('display_name')}}</a>
+
+            <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="navSidebarMenu"
+                    class="settings-button"
+                    [matBadge]="(currentUser.model$ | async)?.unread_notifications_count"
+                    matBadgeColor="accent"
+                    matBadgeSize="small"
+                    [matBadgeHidden]="(currentUser.model$ | async)?.unread_notifications_count < 1"
+            >
+                <mat-icon svgIcon="settings"></mat-icon>
+            </button>
+
+            <mat-menu #navSidebarMenu="matMenu">
+               <nav-sidebar-user-menu></nav-sidebar-user-menu>
+            </mat-menu>
+        </div>
+
+        <ng-container *ngIf="!currentUser.isLoggedIn()">
+            <a routerLink="/login" mat-raised-button color="accent" trans>Login</a>
+            <a routerLink="/register" *ngIf="!settings.get('registration.disable')" mat-button trans>Register</a>
+        </ng-container>
+    </div>
+
+    <div class="your-music-container">
+        <div class="title" trans>Your Music</div>
+        <custom-menu position="sidebar-secondary" class="sidebar-nav"></custom-menu>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="playlists-container">
+        <div class="header">
+            <div class="name" trans>Playlists</div>
+            <button mat-icon-button class="new-playlist-button" (click)="openNewPlaylistModal()" [disabled]="!currentUser.hasPermission('playlists.create')">
+                <mat-icon svgIcon="playlist-add"></mat-icon>
+            </button>
+        </div>
+        <div class="playlists sidebar-nav">
+            <a class="sidebar-nav-item playlist" *ngFor="let playlist of playlists.get()" [contextMenu]="{item: playlist, type: 'playlist'}" [routerLink]="urls.playlist(playlist)">
+                {{playlist.name}}
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="current-track" *ngIf="player.cued()" [contextMenu]="{item: player.getCuedTrack(), type: 'track'}">
+    <media-image [media]="player.getCuedTrack()"></media-image>
+    <div class="meta">
+        <a class="track-name hover-underline" [routerLink]="urls.track(player.getCuedTrack())">{{player.getCuedTrack().name}}</a>
+        <artists-links-list class="artist-name" [track]="player.getCuedTrack()"></artists-links-list>
+    </div>
+    <div class="toggle-track">
+        <library-track-toggle-button [track]="player.getCuedTrack()"></library-track-toggle-button>
+    </div>
+</div> -->
+
+<!-- <div class="container">
+<p>right side bar</p>
+</div> -->
+
+<section>
+  <div class="input-group my-5">
+    <input type="text" class="form-control search-bar text-white" (change)='getsearchcus($event)'
+      placeholder="Search..." trans-placeholder aria-label="Recipient's username" aria-describedby="basic-addon2"
+      value="{{catdata}}">
+    <span class="input-group-text" id="basic-addon2">
+      <i class="bi bi-search"></i>
+    </span>
+  </div>
+  <!-- <input [formControl]="searchPanel.searchCategory" type="hidden"> -->
+
+  <p class="search-category-song" trans>Search by</p>
+  <form>
+    <!-- <select [formControl]="searchPanel.searchCategory" (change)='getGenre($event)' class="fw-bold form-select mb-2 category-selector">
+      <option selected value="0">Category</option>
+      <option *ngFor="let cates of allCategories" value="{{cates.id}}">{{cates.name}}</option>
+    </select>
+
+    <select [formControl]="searchPanel.searchGenre" class="fw-bold  form-select form-select-lg mb-2 category-selector">
+      <option value="0">Genre</option>
+      <option *ngFor="let genre of allGenres" value="{{genre.id}}">{{genre.name}}</option>
+    </select>
+
+    <select [formControl]="searchPanel.searchSubGenre" class="fw-bold  form-select form-select-lg category-selector">
+      <option value="0">Sub-Genre</option>
+      <option *ngFor="let subGenre of allSubGenres" value="{{subGenre.id}}">{{subGenre.name}}</option>
+    </select> -->
+    <select (change)='getGenre($event)' [formControl]="searchcat" class="fw-bold form-select mb-2 category-selector">
+      <option selected value="0" trans>Category</option>
+      <option *ngFor="let cates of allCategories" value="{{cates.id}}">{{cates.name}}</option>
+    </select>
+
+    <select class="fw-bold  form-select form-select-lg mb-2 category-selector" [formControl]="searchgen"
+      (change)='getGenresearch($event)'>
+      <option value="0" trans>Genre</option>
+      <option *ngFor="let genre of allGenres" value="{{genre.id}}">{{genre.name}}</option>
+    </select>
+
+    <select class="fw-bold  form-select form-select-lg category-selector" [formControl]="searchsubgenre"
+      (change)='getsubGenresearch($event)'>
+      <option value="0" trans>Sub-Genre</option>
+      <option *ngFor="let subGenre of allSubGenres" value="{{subGenre.id}}">{{subGenre.name}}</option>
+    </select>
+  </form>
+</section>
+
+<section>
+  <h2 class="my-5 tranding-list-heading" trans>Trending List</h2>
+  <track-list [showTrendingList]="'true'" [dataSourceTrending]="datatable" [queueItemId]="queueId()">
+  </track-list>
+  <!-- <div class="text-center my-5 view-all-list">
+    <a href="#">View all</a>
+    <i class="bi bi-chevron-right ml-3"></i>
+  </div> -->
+</section>

@@ -1,0 +1,67 @@
+<section>
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <h4 class="playlist-details-heading mt-5 mb-3">{{playlist['name']}}</h4>
+      <!-- <img src="{{apiUrl + playlist['image']}}" height="200" width="200"> -->
+    </div>
+  </div>
+</section>
+
+
+<div class="datatable responsive-table">
+  <!-- <datatable-header pluralResourceName="title" [showSelectedActions]="false">
+  </datatable-header> -->
+  <table class="material-table">
+    <thead>
+      <tr class="customHeader">
+        <!-- <th table-header-checkbox></th> -->
+        <th table-sort-header="title" trans>Title</th>
+        <th table-sort-header trans>Artist</th>
+        <th table-sort-header trans>Genre</th>
+        <th table-sort-header trans>BPM</th>
+        <th table-sort-header trans>Key</th>
+        <th table-sort-header="release_date" trans>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let gaana of gaane$; let _index = index">
+        <tr>
+          <td class="text-truncate d-inline-block" style="max-width: 200px;"><a href="#"><i
+                class="bi bi-play-circle-fill play-circle-icon"></i></a></td>
+          <td data-label="First Name"></td>
+          <td data-label="Last Name"></td>
+          <td data-label="Last Name"></td>
+          <td data-label="Last Name"></td>
+          <td data-label="Assigned At"></td>
+          <td><a data-bs-toggle="collapse" href=""><i class="bi bi-three-dots collapse-icon"></i></a>
+          </td>
+        </tr>
+
+        <tr class="--custom-height-unset">
+          <td colspan="7" class="p-0">
+            <div class="collapse" id="">
+              <table class="table modal-details">
+                <tr class="text-white">
+                  <td trans>Download this song !</td>
+                  <td><i class="bi bi-circle song-download-circle"></i> <i
+                      class="bi bi-circle song-download-circle"></i> <i class="bi bi-circle song-download-circle"></i>
+                  </td>
+                  <td>
+                    <a href="javascript:void(0)"><i class="bi bi-download song-download-icon"></i></a>
+                  </td>
+                </tr>
+                <!-- <tr class="border-top-0 ">
+                <td> Do It To It - Kwest vs Acraze Edit (Dirty)</td>
+                <td><i class="bi bi-circle song-download-circle"></i> <i
+                    class="bi bi-circle song-download-circle"></i> <i class="bi bi-circle song-download-circle"></i>
+                </td>
+                <td><a href="javascript:void(0)"><i class="bi bi-download song-download-icon"></i></a></td>
+              </tr> -->
+              </table>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
